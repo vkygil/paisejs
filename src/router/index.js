@@ -14,14 +14,15 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
+      {
+        path:'/person/:id',
+        name:'person',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/Person.vue'),
+    
+      }
     ],
   },
-  {
-    path:'/person',
-    name:'person',
-    component: () => import(/* webpackChunkName: "home" */ '@/views/Person.vue'),
-
-  }
+  
 ]
 
 const router = createRouter({
