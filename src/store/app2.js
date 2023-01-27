@@ -5,7 +5,7 @@ export const useBookStore = defineStore('book', () => {
   const count = ref(0)
   const book = reactive([
     {
-      name: "Vikt",
+      name: "Vckyt",
       total: 22,
       transactions: [
         {
@@ -37,7 +37,7 @@ export const useBookStore = defineStore('book', () => {
       ],
     },
     {
-      name: "Omkar",
+      name: "Gill",
       total: 22,
       transactions: [
         {
@@ -49,7 +49,7 @@ export const useBookStore = defineStore('book', () => {
       ],
     },
     {
-      name: "RIPPY",
+      name: "singh",
       total: 22,
       transactions: [
         {

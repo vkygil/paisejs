@@ -3,9 +3,11 @@
     <v-app-bar-nav-icon
       variant="text"
       @click.stop="drawer = !drawer"
+      icon="mdi-wallet"
+      @click="$router.push('/')"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title @click="$router.push('/')">Paise</v-toolbar-title>
+    <v-toolbar-title   @click="$router.push('/')">Paise</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
@@ -14,7 +16,7 @@
     <!-- <v-btn variant="text" icon="mdi-filter"></v-btn>
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer">
+  <!-- <v-navigation-drawer v-model="drawer">
     <v-sheet color="grey-lighten-4" class="pa-4">
       <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
       <div>Vciky</div>
@@ -30,7 +32,7 @@
         <v-list-item-title>{{ "text" }}</v-list-item-title>
       </v-list-item>
     </v-list>
-  </v-navigation-drawer>
+  </v-navigation-drawer> -->
 </template>
 
 <script setup>

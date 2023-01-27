@@ -9,8 +9,31 @@
     ></v-text-field> -->
 
     <v-card color="green" class="ma-4 pa-2" dark>
-      <v-card-title class="text-h6"> Sukhchain Singhx </v-card-title>
-      <v-card-title class="text-h4"> {{ total }}€ borrowed </v-card-title>
+      <!-- <v-card-title class="text-h6"> {{cPerson.name}}   </v-card-title> -->
+      <v-card-title class="blue white--text d-flex">
+        <span class="text-h5">{{ cPerson.name }}</span>
+
+        <v-spacer></v-spacer>
+
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn
+              icon="mdi-dots-vertical"
+              v-bind="props"
+              color="success"
+            ></v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item v-for="(item, i) in menuItems" :key="i">
+              <v-list-item-title @click="menuItemClicked(item.title)">{{
+                item.title
+              }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-card-title>
+      <v-card-text class="text-h4"> {{ total }}€ borrowed </v-card-text>
     </v-card>
     <v-card class="ma-2 pa-2" variantZ="tonal">
       <v-toolbar>
@@ -70,12 +93,13 @@
   
 <script setup>
 import TransactionEdit from "@/components/TransactionEdit.vue";
-import { ref, onMounted, computed, watch } from "vue";
-import { useRoute } from "vue-router";
+import { ref, onMounted, computed, watch, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useAppStore } from "@/store/app";
 import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const route = useRoute();
+const router = useRouter();
 const id = route.params.id;
 const options = { month: "long", day: "numeric" };
 
@@ -83,32 +107,31 @@ const options = { month: "long", day: "numeric" };
 // const { book, person } =useBookStore()
 const { book } = storeToRefs(useBookStore());
 console.log(book);
-const cPerson = book.value.find((t) => t.name == id);
+const cPerson = book.value.find((t) => t.name == id) || {};
+
 //  let cPerson = person(id);
 const transactions = ref([]);
 const transactionEditRef = ref(null);
 
+const menuItems = reactive([{ title: "Change Name" }, { title: "Remove" }]);
+const menuItemClicked = (i) => {
+  if (i == "Change Name") {
+    let person = prompt("Please enter your name", "Harry Potter");
+    if (person != null) cPerson.name = person;
+  }
+  if (i == "Remove") {
+    let text = "Delete this person?";
+    if (confirm(text) == true) {
+      const cPersonIndex = book.value.findIndex((t) => t.name == id);
+      if (cPersonIndex > -1) {
+        book.value.splice(cPersonIndex, 1);
+        router.push("/");
+      }
+    }
+  }
+};
+
 transactions.value = [
-  {
-    id: "asdfwegjhfk",
-    amount: 5,
-    type: "lend",
-    date: "2022-10-25",
-    message: "message 1",
-  },
-  {
-    id: "3g3afwecvnjg",
-    amount: 10,
-    type: "lend",
-    date: "2023-02-21",
-    message: "message 2",
-  },
-  {
-    id: "assg3rafwex",
-    amount: 2,
-    type: "borrow",
-    date: "2022-09-25",
-  },
   {
     id: "g3gehvcvcxe",
     amount: 3,
@@ -119,12 +142,16 @@ transactions.value = [
 
 onMounted(() => {
   console.log(id);
-
-  // setTimeout(() => {
-  //   console.log("ye");
-  //   cPerson.transactions.splice(0, 1);
-  // }, 2000);
 });
+
+function checkUser() {
+  if (!cPerson || !cPerson.transactions) {
+    router.push("/");
+    return false;
+  }
+  return true;
+}
+
 function saveTranaction(t) {
   let tf = cPerson.transactions.findIndex((trans) => trans.id == t.id);
   console.log(tf);
@@ -138,9 +165,9 @@ function saveTranaction(t) {
 }
 function removeTranaction(tId) {
   let tf = cPerson.transactions.findIndex((trans) => trans.id == tId);
-  if (tf > 0) {
-    // cPerson.transactions.splice(tf, 1);
-    cPerson.transactions[tf] = 1;
+  if (tf > -1) {
+    cPerson.transactions.splice(tf, 1);
+    // cPerson.transactions[tf] = 1;
   }
 }
 function openTransactionModal(t) {
@@ -148,6 +175,7 @@ function openTransactionModal(t) {
   transactionEditRef.value.open(t);
 }
 const transactionsComputed = computed(() => {
+  if (!checkUser()) return -1;
   return cPerson.transactions
     .sort((a, b) => b.date.localeCompare(a.date)) //dates
     .reduce((sum, t) => {
@@ -159,6 +187,8 @@ const transactionsComputed = computed(() => {
 });
 
 const total = computed(() => {
+  if (!checkUser()) return -1;
+
   return cPerson.transactions.reduce(
     (s, t) => (s += t.type == "lend" ? -Number(t.amount) : Number(t.amount)),
     0

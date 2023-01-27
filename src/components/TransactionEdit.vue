@@ -72,7 +72,7 @@ const emit = defineEmits(["save", "remove"]);
 
 const dialog = ref(false);
 const transaction = reactive({
-  id: crypto.randomUUID(),
+  id: crypto.randomUUID ? crypto.randomUUID(): Math.random().toString(),
   amount: 0,
   date: "2023-12-21",
   message: "",
