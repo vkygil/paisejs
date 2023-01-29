@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, watch, watchEffect } from "vue";
+import { ref, reactive, watch, computed, watchEffect } from "vue";
 
 export const useBookStore = defineStore('book', () => {
   const count = ref(0)
@@ -64,14 +64,27 @@ export const useBookStore = defineStore('book', () => {
   ])
   const person = (name) => book.find((t) => t.name == name)
   const addPerson = () => {
-    let person = prompt("Please enter your name", "Harry Potter");
+    let person = prompt("Please enter the person's name", "Singh");
     if (person != null) {
       book.push({
         name: person, total: 0, transactions: []
       })
     }
   }
-
-
+  const filteredBook = computed(() => {
+    return book.value
+  });
+  // watch(filteredBook, (newVal) => {
+  //   console.log("Changedx");
+  // })
+  // watch(()=>book,(newVal)=>{
+  //   console.log("Changedx");
+  // })
+  watch(() => book, (newVal) => {
+    console.log("Changedx");
+  }, {
+    immediate: true,
+    deep: true
+  })
   return { book, person, addPerson }
 })

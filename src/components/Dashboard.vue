@@ -1,16 +1,16 @@
 <template>
-  <v-app id="inspire"> 
-   
+  <v-app id="inspire">
     <v-main>
       <v-card class="mx-auto" color="transparent" max-width="400">
         <v-card-text>
-          <v-text-field 
+          <v-text-field
             density="compact"
             variant="solo"
             label="Search people"
             append-inner-icon="mdi-magnify"
             single-line
-            hide-details 
+            hide-details
+            v-model="filter"
           ></v-text-field>
         </v-card-text>
       </v-card>
@@ -20,15 +20,13 @@
             <v-card>
               <v-list lines="two">
                 <v-list-subheader>{{ "I owe them" }}</v-list-subheader>
-                <template v-for="t in book" :key="t.name">
-                  <v-list-item :to="'/person/'+t.name">
+                <template v-for="t in filteredBook" :key="t.name">
+                  <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
-
                     <v-list-item-subtitle class="text-green-lighten-1">
                       <strong> {{ t.total }}€ </strong>
                     </v-list-item-subtitle>
                   </v-list-item>
-
                   <v-divider></v-divider>
                 </template>
               </v-list>
@@ -41,11 +39,16 @@
 </template>
   
 <script setup>
-import { reactive, ref, defineEmits,watch } from "vue";
-import { useBookStore  } from "@/store/app2";
+import { reactive, ref, computed, watch } from "vue";
+import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const { book } = storeToRefs(useBookStore());
 
+let filter = ref("");
 
-
+const filteredBook = computed(() => {
+  return book.value.filter((x) =>
+    x.name.toLowerCase().includes(filter.value.toLowerCase())
+  );
+});
 </script>

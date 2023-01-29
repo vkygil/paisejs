@@ -67,7 +67,8 @@
                 </v-chip>
                 <span>
                   {{
-                    transaction.dateObj.toLocaleDateString("en-IN", options)
+                    // transaction.dateObj.toLocaleDateString("en-IN", options)
+                    (new Date(transaction.date)).toLocaleDateString("en-IN", options)
                   }}</span
                 >
               </div>
@@ -106,7 +107,7 @@ const options = { month: "long", day: "numeric" };
 // const { person } = useAppStore();
 // const { book, person } =useBookStore()
 const { book } = storeToRefs(useBookStore());
-console.log(book);
+// console.log(book);
 const cPerson = book.value.find((t) => t.name == id) || {};
 
 //  let cPerson = person(id);
@@ -131,15 +132,6 @@ const menuItemClicked = (i) => {
   }
 };
 
-transactions.value = [
-  {
-    id: "g3gehvcvcxe",
-    amount: 3,
-    type: "lend",
-    date: "2023-06-05",
-  },
-];
-
 onMounted(() => {
   console.log(id);
 });
@@ -160,6 +152,7 @@ function saveTranaction(t) {
     // cPerson.transactions[tf]=t;
     cPerson.transactions.splice(tf, 1, t);
   } else {
+    // book.value[0].transactions.push(t);
     cPerson.transactions.push(t);
   }
 }
@@ -175,29 +168,35 @@ function openTransactionModal(t) {
   transactionEditRef.value.open(t);
 }
 const transactionsComputed = computed(() => {
+  // return []
   if (!checkUser()) return -1;
   return cPerson.transactions
     .sort((a, b) => b.date.localeCompare(a.date)) //dates
     .reduce((sum, t) => {
-      t.dateObj = new Date(t.date);
-      let year = t.dateObj.getFullYear();
+      let dateObj = new Date(t.date);
+      let year =  dateObj.getFullYear();
       sum[year] = [...(sum[year] || []), t];
       return sum;
     }, {});
 });
 
 const total = computed(() => {
+  // return []
+
   if (!checkUser()) return -1;
 
-  return cPerson.transactions.reduce(
+  return [...cPerson.transactions].reduce(
     (s, t) => (s += t.type == "lend" ? -Number(t.amount) : Number(t.amount)),
     0
   );
 });
 
 watch(total, (currentValue) => {
-  cPerson.total = currentValue;
+  // cPerson.total = currentValue;
 });
+// watch(cPerson, (currentValue) => {
+//   console.log("diablo");
+// });
 </script>
 <style>
 </style>
