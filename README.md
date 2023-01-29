@@ -1,3 +1,12 @@
+#TODO
+
+- [ ] Save to localStrage
+- [ ] i18n
+- [ ] Save to cloud
+
+
+
+---
 # essentials
 
 ## Project setup

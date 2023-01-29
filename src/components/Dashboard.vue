@@ -20,10 +20,26 @@
             <v-card>
               <v-list lines="two">
                 <v-list-subheader>{{ "I owe them" }}</v-list-subheader>
-                <template v-for="t in filteredBook" :key="t.name">
+                <template v-for="t in filteredBook.postive" :key="t.name">
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
                     <v-list-item-subtitle class="text-green-lighten-1">
+                      <strong> {{ t.total }}€ </strong>
+                    </v-list-item-subtitle>
+                  </v-list-item>
+                  <v-divider></v-divider>
+                </template>
+              </v-list>
+            </v-card>
+          </v-col>
+          <v-col cols="12">
+            <v-card>
+              <v-list lines="two">
+                <v-list-subheader>{{ "They owe me" }}</v-list-subheader>
+                <template v-for="t in filteredBook.negative" :key="t.name">
+                  <v-list-item :to="'/person/' + t.name">
+                    <v-list-item-title> {{ t.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="text-yellow-lighten-1">
                       <strong> {{ t.total }}€ </strong>
                     </v-list-item-subtitle>
                   </v-list-item>
@@ -42,13 +58,16 @@
 import { reactive, ref, computed, watch } from "vue";
 import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
-const { book } = storeToRefs(useBookStore());
+const book = storeToRefs(useBookStore()).book;
 
 let filter = ref("");
-
 const filteredBook = computed(() => {
-  return book.value.filter((x) =>
+  let fbook = book.value.filter((x) =>
     x.name.toLowerCase().includes(filter.value.toLowerCase())
   );
+  return {
+    postive: fbook.filter((x) => x.total >= 0),
+    negative: fbook.filter((x) => x.total < 0),
+  };
 });
 </script>

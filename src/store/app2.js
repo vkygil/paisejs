@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, watch, computed, watchEffect } from "vue";
+import { ref, reactive, watch, computed, watchEffect, onMounted } from "vue";
 
 export const useBookStore = defineStore('book', () => {
+  //refs
   const count = ref(0)
-  const book = reactive([
+  const book = reactive([])
+  const bookx = reactive([
     {
       name: "Vckyt",
       total: 22,
@@ -62,7 +64,13 @@ export const useBookStore = defineStore('book', () => {
       ],
     },
   ])
-  const person = (name) => book.find((t) => t.name == name)
+
+  onMounted(() => {
+    let localStorageData = getLS()
+    Object.assign(book, localStorageData?.book || [])
+  })
+
+  //actions
   const addPerson = () => {
     let person = prompt("Please enter the person's name", "Singh");
     if (person != null) {
@@ -71,20 +79,30 @@ export const useBookStore = defineStore('book', () => {
       })
     }
   }
-  const filteredBook = computed(() => {
-    return book.value
-  });
-  // watch(filteredBook, (newVal) => {
-  //   console.log("Changedx");
-  // })
-  // watch(()=>book,(newVal)=>{
-  //   console.log("Changedx");
-  // })
-  watch(() => book, (newVal) => {
-    console.log("Changedx");
-  }, {
-    immediate: true,
-    deep: true
-  })
-  return { book, person, addPerson }
+
+  const getLS = () => {
+    return JSON.parse(localStorage.getItem("paisejs"))
+  }
+
+  //funcions
+  function saveBook() {
+    let tosave = {
+      data: "ok",
+      book: book
+    }
+    localStorage.setItem("paisejs", JSON.stringify(tosave))
+  }
+
+  //autosave
+  let uploadTimeout;
+  watch(book, (newVal) => {
+    clearTimeout(uploadTimeout);
+    uploadTimeout = setTimeout(() => {
+      console.log("save_data()");
+      saveBook()
+    }, 777);
+  }, { deep: true });
+
+
+  return { book, addPerson, saveBook }
 })

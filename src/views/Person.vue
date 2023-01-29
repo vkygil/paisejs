@@ -33,7 +33,9 @@
           </v-list>
         </v-menu>
       </v-card-title>
-      <v-card-text class="text-h4"> {{ total }}€ borrowed </v-card-text>
+      <v-card-text class="text-h4">
+        {{ Math.abs(total) }}€ {{ getOweTextByAmount(total) }}
+      </v-card-text>
     </v-card>
     <v-card class="ma-2 pa-2" variantZ="tonal">
       <v-toolbar>
@@ -60,7 +62,7 @@
               <div class="d-flex justify-space-between">
                 <v-chip
                   class="ma-0"
-                  :color="transaction.type == 'borrow' ? 'green' : 'red'"
+                  :color="transaction.type == 'borrow' ? 'green' : 'yellow'"
                   text-color="white"
                 >
                   {{ transaction.amount }}€
@@ -68,7 +70,10 @@
                 <span>
                   {{
                     // transaction.dateObj.toLocaleDateString("en-IN", options)
-                    (new Date(transaction.date)).toLocaleDateString("en-IN", options)
+                    new Date(transaction.date).toLocaleDateString(
+                      "en-IN",
+                      options
+                    )
                   }}</span
                 >
               </div>
@@ -88,15 +93,12 @@
       @remove="removeTranaction"
     ></TransactionEdit>
   </v-responsive>
-</template>
+</template> 
 
-  
-  
 <script setup>
 import TransactionEdit from "@/components/TransactionEdit.vue";
 import { ref, onMounted, computed, watch, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useAppStore } from "@/store/app";
 import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const route = useRoute();
@@ -106,13 +108,17 @@ const options = { month: "long", day: "numeric" };
 
 // const { person } = useAppStore();
 // const { book, person } =useBookStore()
-const { book } = storeToRefs(useBookStore());
+const book = storeToRefs(useBookStore()).book;
 // console.log(book);
 const cPerson = book.value.find((t) => t.name == id) || {};
 
 //  let cPerson = person(id);
 const transactions = ref([]);
 const transactionEditRef = ref(null);
+
+onMounted(() => {
+  console.log(id);
+});
 
 const menuItems = reactive([{ title: "Change Name" }, { title: "Remove" }]);
 const menuItemClicked = (i) => {
@@ -131,10 +137,6 @@ const menuItemClicked = (i) => {
     }
   }
 };
-
-onMounted(() => {
-  console.log(id);
-});
 
 function checkUser() {
   if (!cPerson || !cPerson.transactions) {
@@ -168,23 +170,19 @@ function openTransactionModal(t) {
   transactionEditRef.value.open(t);
 }
 const transactionsComputed = computed(() => {
-  // return []
   if (!checkUser()) return -1;
   return cPerson.transactions
     .sort((a, b) => b.date.localeCompare(a.date)) //dates
     .reduce((sum, t) => {
       let dateObj = new Date(t.date);
-      let year =  dateObj.getFullYear();
+      let year = dateObj.getFullYear();
       sum[year] = [...(sum[year] || []), t];
       return sum;
     }, {});
 });
 
 const total = computed(() => {
-  // return []
-
   if (!checkUser()) return -1;
-
   return [...cPerson.transactions].reduce(
     (s, t) => (s += t.type == "lend" ? -Number(t.amount) : Number(t.amount)),
     0
@@ -192,8 +190,21 @@ const total = computed(() => {
 });
 
 watch(total, (currentValue) => {
-  // cPerson.total = currentValue;
+  cPerson.total = currentValue;
 });
+
+// funcitons
+const getOweTextByAmount = (t) => {
+  switch (true) {
+    case t > 0:
+      return "to give";
+    case t == 0:
+      return "";
+    case t < 0:
+      return "to take";
+  }
+  return "test";
+};
 // watch(cPerson, (currentValue) => {
 //   console.log("diablo");
 // });

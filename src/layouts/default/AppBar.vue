@@ -2,7 +2,7 @@
   <v-app-bar prominent>
     <v-app-bar-nav-icon
       variant="text"
-      @click.stop="drawer = !drawer" 
+      @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
 
@@ -16,6 +16,7 @@
 
     <v-spacer></v-spacer>
 
+    <!-- <v-btn @click="saveBook" variant="text" icon="mdi-content-save-all"></v-btn> -->
     <v-btn @click="addPerson" variant="text" icon="mdi-account-plus"></v-btn>
 
     <!-- <v-btn variant="text" icon="mdi-filter"></v-btn>
@@ -24,7 +25,7 @@
   <v-navigation-drawer v-model="drawer">
     <v-sheet color="grey-lighten-4" class="pa-4">
       <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
-      <div>Vciky</div>
+      <div>Me</div>
     </v-sheet>
 
     <v-divider></v-divider>
@@ -53,9 +54,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue"; 
+import { ref } from "vue";
 import { useBookStore } from "@/store/app2";
-const addPerson = useBookStore().addPerson;
+const store = useBookStore();
+const addPerson = store.addPerson;
+const saveBook = store.saveBook;
 
 const drawer = ref(false);
 const dataSavePreference = ref("offline");
