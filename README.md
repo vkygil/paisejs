@@ -1,7 +1,7 @@
 #TODO
 
-- [ ] Save to localStrage
-- [ ] i18n
+- [x] Save to localStrage
+- [ ] i18n (español, punjabi)
 - [ ] Save to cloud
 
 
