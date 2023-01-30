@@ -23,10 +23,10 @@
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
   <v-navigation-drawer v-model="drawer">
-    <v-sheet color="grey-lighten-4" class="pa-4">
+    <!-- <v-sheet color="grey-lighten-4" class="pa-4">
       <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
       <div>Me</div>
-    </v-sheet>
+    </v-sheet> -->
 
     <v-divider></v-divider>
 

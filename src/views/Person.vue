@@ -8,19 +8,19 @@
       placeholder="Name"
     ></v-text-field> -->
 
-    <v-card color="green" class="ma-4 pa-2" dark>
+    <v-card theme="light" class="ma-4 pa-2 header" dark>
       <!-- <v-card-title class="text-h6"> {{cPerson.name}}   </v-card-title> -->
-      <v-card-title class="blue white--text d-flex">
-        <span class="text-h5">{{ cPerson.name }}</span>
+      <v-card-title class="  black--text d-flex">
+      <!-- <v-card-title class="  d-flex"> -->
+        <span class=" black--text text-h5">{{ cPerson.name }}</span>
 
         <v-spacer></v-spacer>
 
-        <v-menu>
+        <v-menu theme="brownTing">
           <template v-slot:activator="{ props }">
             <v-btn
               icon="mdi-dots-vertical"
-              v-bind="props"
-              color="success"
+              v-bind="props" 
             ></v-btn>
           </template>
 
@@ -38,7 +38,7 @@
       </v-card-text>
     </v-card>
     <v-card class="ma-2 pa-2" variantZ="tonal">
-      <v-toolbar>
+      <!-- <v-card flat>
         <v-toolbar-title>Transactions</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn
@@ -46,9 +46,17 @@
           icon="mdi-plus"
           @click="openTransactionModal()"
         ></v-btn>
-      </v-toolbar>
-
-      <v-list lines="x">
+      </v-card> -->
+      <v-card class="mx-auto">
+        <v-card-actions>
+          <v-btn variant="text"> Transactions </v-btn> 
+          <v-spacer></v-spacer> 
+          <v-btn icon="mdi-plus" @click="openTransactionModal()"></v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-divider></v-divider>
+      <!-- linear-gradient(45deg, #57b761,#a2ae0b); -->
+      <v-list  >
         <template
           v-for="year in Object.keys(transactionsComputed).reverse()"
           :key="year"
@@ -210,4 +218,9 @@ const getOweTextByAmount = (t) => {
 // });
 </script>
 <style>
+</style>
+<style>
+.header{
+  background: linear-gradient(45deg, #D5CEA3,#E5E5CB);
+}
 </style>

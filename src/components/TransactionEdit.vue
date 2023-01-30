@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent>
+    <v-dialog v-model="dialog" persistent max-width="444">
       <v-card>
         <v-card-title>
           <span class="text-h5">Add transaction</span>
@@ -8,16 +8,32 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col cols="12" sm="6">
-                <v-btn-toggle
-                  v-model="transaction.type"
-                  rounded="0"
-                  :color="transaction.type=='borrow'?'green':'red'"
-                  group
-                >
-                  <v-btn value="borrow" @click="transaction.type='borrow'"> Borrow </v-btn> 
-                  <v-btn value="lend"  @click="transaction.type='lend'"> Lend </v-btn>
-                </v-btn-toggle>
+              <v-col cols="12" sm="12">
+                <div class="d-flex">
+                  <v-spacer></v-spacer>
+                  <v-btn-toggle
+                    v-model="transaction.type"
+                    rounded="0"
+                    :color="transaction.type == 'borrow' ? 'green' : 'red'"
+                    group
+                  >
+                    <v-btn
+                      prepend-icon="mdi-arrow-down-bold"
+                      value="borrow"
+                      @click="transaction.type = 'borrow'"
+                    >
+                      Take
+                    </v-btn>
+                    <v-btn
+                      value="lend"
+                      prepend-icon="mdi-arrow-up-bold"
+                      @click="transaction.type = 'lend'"
+                    >
+                      Give
+                    </v-btn>
+                  </v-btn-toggle>
+                  <v-spacer></v-spacer>
+                </div>
 
                 <v-text-field
                   v-model="transaction.amount"
@@ -72,7 +88,7 @@ const emit = defineEmits(["save", "remove"]);
 
 const dialog = ref(false);
 const transaction = reactive({
-  id: crypto.randomUUID ? crypto.randomUUID(): Math.random().toString(),
+  id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
   amount: 0,
   date: "2023-12-21",
   message: "",
