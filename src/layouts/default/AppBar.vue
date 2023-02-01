@@ -1,5 +1,8 @@
 <template>
-  <v-app-bar prominent>
+  <v-app-bar  prominent>
+    <!-- <template v-slot:extension>
+     
+    </template> -->
     <v-app-bar-nav-icon
       variant="text"
       @click.stop="drawer = !drawer"
@@ -63,3 +66,8 @@ const saveBook = store.saveBook;
 const drawer = ref(false);
 const dataSavePreference = ref("offline");
 </script>
+<style>
+.creamyBack {
+  background: linear-gradient(45deg, #d5cea3, #e5e5cb);
+}
+</style>

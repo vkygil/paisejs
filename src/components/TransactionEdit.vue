@@ -38,9 +38,11 @@
                 <v-text-field
                   v-model="transaction.amount"
                   label="Amount"
-                  suffix="€"
-                  type="number"
-                  hide-details
+                  suffix="€" 
+                  min="0"
+                  inputmode="decimal" 
+                  :hide-details="amountError"
+                  :error-messages="amountError?'':'Please write the amount correctly'"
                 ></v-text-field>
                 <v-divider></v-divider>
                 <v-text-field
@@ -55,13 +57,7 @@
                   label="Message"
                   maxlength="220"
                 ></v-textarea>
-              </v-col>
-              <!-- <v-col cols="12" sm="6">
-             
-              </v-col>
-              <v-col cols="12" sm="6">
-             
-              </v-col> -->
+              </v-col> 
             </v-row>
           </v-container>
         </v-card-text>
@@ -82,7 +78,7 @@
   </v-row>
 </template>
 <script setup>
-import { reactive, ref, defineEmits } from "vue";
+import { reactive, ref, defineEmits ,computed} from "vue";
 
 const emit = defineEmits(["save", "remove"]);
 
@@ -95,7 +91,12 @@ const transaction = reactive({
   type: "borrow",
 });
 
-const save = () => {
+const amountError = computed(()=>{
+  return /^(?!0*[.,]?0+$)\d*[.,]?\d+$/.test(transaction.amount) 
+})
+
+const save = () => { 
+  transaction.amount = transaction.amount.replace(",",".")
   dialog.value = false;
   emit("save", { ...transaction });
 };

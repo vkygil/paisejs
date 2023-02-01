@@ -2,6 +2,26 @@
   <v-app id="inspire">
     <v-main>
       <v-card class="mx-auto" color="transparent" max-width="400">
+        <v-card   theme="light" class="ma-4 creamyBack pa-1" max-width="400" dark>
+          <div  class="d-flex">
+            <v-spacer></v-spacer>
+            Total accounts
+            <v-spacer></v-spacer>
+          </div>
+          <div class="d-flex">
+            <v-spacer></v-spacer>
+            <v-btn colorx="#5dbb5a" color="rgb(9 108 5)" variant="tonal" rounded="pill" size="small"
+              >I owe them 2000€
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn colorx="#ffeb3b" color="rgb(125 8 8)" variant="tonal" rounded="pill" size="small">
+              They owe me 2000€
+            </v-btn>
+            <v-spacer></v-spacer>
+          </div>
+        </v-card>
+      </v-card>
+      <v-card class="mx-auto" color="transparent" max-width="400">
         <v-card-text>
           <v-text-field
             density="compact"
@@ -71,3 +91,12 @@ const filteredBook = computed(() => {
   };
 });
 </script>
+
+<style>
+.creamyBack {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important;
+  /* background: #3c2a21; */
+}
+</style>
