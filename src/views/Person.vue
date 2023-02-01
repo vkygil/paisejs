@@ -10,18 +10,15 @@
 
     <v-card theme="light" class="ma-4 pa-2 header" dark>
       <!-- <v-card-title class="text-h6"> {{cPerson.name}}   </v-card-title> -->
-      <v-card-title class="  black--text d-flex">
-      <!-- <v-card-title class="  d-flex"> -->
-        <span class=" black--text text-h5">{{ cPerson.name }}</span>
+      <v-card-title class="black--text d-flex">
+        <!-- <v-card-title class="  d-flex"> -->
+        <span class="black--text text-h5">{{ cPerson.name }}</span>
 
         <v-spacer></v-spacer>
 
         <v-menu theme="brownTing">
           <template v-slot:activator="{ props }">
-            <v-btn
-              icon="mdi-dots-vertical"
-              v-bind="props" 
-            ></v-btn>
+            <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
           </template>
 
           <v-list>
@@ -49,14 +46,14 @@
       </v-card> -->
       <v-card class="mx-auto">
         <v-card-actions>
-          <v-btn variant="text"> Transactions </v-btn> 
-          <v-spacer></v-spacer> 
+          <v-btn variant="text"> Transactions </v-btn>
+          <v-spacer></v-spacer>
           <v-btn icon="mdi-plus" @click="openTransactionModal()"></v-btn>
         </v-card-actions>
       </v-card>
       <v-divider></v-divider>
       <!-- linear-gradient(45deg, #57b761,#a2ae0b); -->
-      <v-list  >
+      <v-list>
         <template
           v-for="year in Object.keys(transactionsComputed).reverse()"
           :key="year"
@@ -75,15 +72,18 @@
                 >
                   {{ transaction.amount }}€
                 </v-chip>
-                <span>
-                  {{
-                    // transaction.dateObj.toLocaleDateString("en-IN", options)
-                    new Date(transaction.date).toLocaleDateString(
-                      "en-IN",
-                      options
-                    )
-                  }}</span
-                >
+                <div class="d-flex flex-column align-end">
+                  <span>
+                    {{
+                      // transaction.dateObj.toLocaleDateString("en-IN", options)
+                      new Date(transaction.date).toLocaleDateString(
+                        "en-IN",
+                        options
+                      )
+                    }}
+                  </span>
+                  <span class="transMessage">{{ transaction.message }} </span>
+                </div>
               </div>
               <!-- <span> Gello there lo there lo there lo there lo there </span> -->
             </v-list-item>
@@ -220,7 +220,15 @@ const getOweTextByAmount = (t) => {
 <style>
 </style>
 <style>
-.header{
-  background: linear-gradient(45deg, #D5CEA3,#E5E5CB);
+.header {
+  background: linear-gradient(45deg, #d5cea3, #e5e5cb);
+}
+.transMessage {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-size: xx-small;
+  color: rgba(218, 179, 152, 0.8);
 }
 </style>

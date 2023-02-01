@@ -2,20 +2,32 @@
   <v-app id="inspire">
     <v-main>
       <v-card class="mx-auto" color="transparent" max-width="400">
-        <v-card   theme="light" class="ma-4 creamyBack pa-1" max-width="400" dark>
-          <div  class="d-flex">
+        <v-card theme="light" class="ma-4 creamyBack pa-1" max-width="400" dark>
+          <div class="d-flex mb-2">
             <v-spacer></v-spacer>
-            Total accounts
+            <v-icon icon="mdi-account-cash"></v-icon>
+            <span class="ml-2"> Total accounts </span>
             <v-spacer></v-spacer>
           </div>
           <div class="d-flex">
             <v-spacer></v-spacer>
-            <v-btn colorx="#5dbb5a" color="rgb(9 108 5)" variant="tonal" rounded="pill" size="small"
-              >I owe them 2000€
+            <v-btn
+              colorx="#5dbb5a"
+              color="rgb(9 108 5)"
+              variant="tonal"
+              rounded="pill"
+              size="small"
+              >I owe them {{ filteredBook.postive.reduce(fbReducer, 0) }}
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn colorx="#ffeb3b" color="rgb(125 8 8)" variant="tonal" rounded="pill" size="small">
-              They owe me 2000€
+            <v-btn
+              colorx="#ffeb3b"
+              color="rgb(125 8 8)"
+              variant="tonal"
+              rounded="pill"
+              size="small"
+            >
+              They owe me {{ filteredBook.negative.reduce(fbReducer, 0) }}€
             </v-btn>
             <v-spacer></v-spacer>
           </div>
@@ -75,11 +87,16 @@
 </template>
   
 <script setup>
-import { reactive, ref, computed, watch } from "vue";
+import { reactive, ref, computed, watch, onMounted } from "vue";
 import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
+onMounted(() => {
+  console.log(filteredBook.value.postive);
+  console.log(filteredBook.value.postive.length);
+  console.log(filteredBook.value.postive.reduce((a, b) => console.log(a), 0));
+});
 let filter = ref("");
 const filteredBook = computed(() => {
   let fbook = book.value.filter((x) =>
@@ -90,6 +107,7 @@ const filteredBook = computed(() => {
     negative: fbook.filter((x) => x.total < 0),
   };
 });
+const fbReducer = (a, b) => b.total + a;
 </script>
 
 <style>
