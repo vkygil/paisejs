@@ -12,7 +12,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 
 const brownTing = {
-  dark: false,
+  dark: true,
   colors: {
     background: '#1A120B',
     surface: '#3C2A21',

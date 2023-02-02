@@ -6,7 +6,7 @@
           <div class="d-flex mb-2">
             <v-spacer></v-spacer>
             <v-icon icon="mdi-account-cash"></v-icon>
-            <span class="ml-2"> Total accounts </span>
+            <span class="ml-2"> {{ $t("Total accounts") }} </span>
             <v-spacer></v-spacer>
           </div>
           <div class="d-flex">
@@ -17,7 +17,8 @@
               variant="tonal"
               rounded="pill"
               size="small"
-              >I owe them {{ filteredBook.postive.reduce(fbReducer, 0) }}
+              >{{ $t("I owe them") }}
+              {{ filteredBook.postive.reduce(fbReducer, 0) }}€
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn
@@ -26,8 +27,8 @@
               variant="tonal"
               rounded="pill"
               size="small"
-            >
-              They owe me {{ filteredBook.negative.reduce(fbReducer, 0) }}€
+              >{{ $t("They owe me") }}
+              {{ filteredBook.negative.reduce(fbReducer, 0) }}€
             </v-btn>
             <v-spacer></v-spacer>
           </div>
@@ -38,7 +39,7 @@
           <v-text-field
             density="compact"
             variant="solo"
-            label="Search people"
+            :label="$t('Search people')"
             append-inner-icon="mdi-magnify"
             single-line
             hide-details
@@ -51,7 +52,7 @@
           <v-col cols="12">
             <v-card>
               <v-list lines="two">
-                <v-list-subheader>{{ "I owe them" }}</v-list-subheader>
+                <v-list-subheader>{{ $t("I owe them") }}</v-list-subheader>
                 <template v-for="t in filteredBook.postive" :key="t.name">
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
@@ -67,7 +68,7 @@
           <v-col cols="12">
             <v-card>
               <v-list lines="two">
-                <v-list-subheader>{{ "They owe me" }}</v-list-subheader>
+                <v-list-subheader>{{ $t("They owe me") }}</v-list-subheader>
                 <template v-for="t in filteredBook.negative" :key="t.name">
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
@@ -98,6 +99,7 @@ onMounted(() => {
   console.log(filteredBook.value.postive.reduce((a, b) => console.log(a), 0));
 });
 let filter = ref("");
+let overlay = ref(true);
 const filteredBook = computed(() => {
   let fbook = book.value.filter((x) =>
     x.name.toLowerCase().includes(filter.value.toLowerCase())
@@ -116,5 +118,7 @@ const fbReducer = (a, b) => b.total + a;
   flex-direction: column;
   background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important;
   /* background: #3c2a21; */
+}
+.img-overlay {
 }
 </style>

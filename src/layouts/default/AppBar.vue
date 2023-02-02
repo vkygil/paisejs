@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar  prominent>
+  <v-app-bar prominent>
     <!-- <template v-slot:extension>
      
     </template> -->
@@ -34,8 +34,17 @@
     <v-divider></v-divider>
 
     <v-list>
+      <!-- <v-list-item>
+        <div class="d-flex justify-space-between"> 
+    <v-btn icon="mdi-translate" variant="flat"></v-btn>
+    <v-btn icon="mdi-heart" variant="tonal"></v-btn>
+    <v-btn icon="mdi-heart" variant="outlined"></v-btn>
+    <v-btn icon="mdi-heart" variant="text"></v-btn>
+    <v-btn icon="mdi-heart" variant="plain"></v-btn>
+  </div>
+      </v-list-item> -->
       <v-list-item>
-        <v-btn-toggle v-model="dataSavePreference" borderless>
+        <v-btn-toggle disabled v-model="dataSavePreference" borderless>
           <v-btn value="offline">
             <span>Offline</span>
             <v-icon end> mdi-content-save-all </v-icon>
@@ -46,11 +55,29 @@
           </v-btn>
         </v-btn-toggle>
       </v-list-item>
-      <v-list-item link>
+
+      <v-list-item disabled link>
         <template v-slot:prepend>
           <v-icon icon="mdi-export"></v-icon>
         </template>
         <v-list-item-title> Export data</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item link>
+        <template v-slot:prepend>
+          <v-icon icon="mdi-translate"></v-icon>
+        </template>
+        <v-list-item-title> Language</v-list-item-title>
+      </v-list-item>
+
+      <v-list-item
+        link
+        onclick='localStorage.removeItem("paisejs");location.reload()'
+      >
+        <template v-slot:prepend>
+          <v-icon color="red" icon="mdi-delete-alert"></v-icon>
+        </template>
+        <v-list-item-title> Clean data</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
