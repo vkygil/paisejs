@@ -22,6 +22,8 @@ Delete                             ;;  Borrar                                   
 Close                              ;;  Cerca                                          ;; A prop                                       ;; ਬੰਦ ਕਰੋ                        
 Save                               ;;  Salvar                                         ;; Salvar                                       ;; ਸੇਵ ਕਰੋ                        
 Add transaction                    ;;  añadir transacción                             ;; Afegir transacció                            ;; ਲੈਣ-ਦੇਣ ਸ਼ਾਮਲ ਕਰੋ                                                          
+Change name                        ;;Cambiar nombre                                   ;; Canviar nom                                  ;;  Naam badlna
+Please write the amount correctly  ;; Por favor escriba la cantidad correctamente     ;;Escriviu correctament l'import                ;; ਕਿਰਪਾ ਕਰਕੇ ਰਕਮ ਸਹੀ ਲਿਖੋ
 `
 let messagesX = {}
 let strX = str.split("\n")

@@ -5,7 +5,7 @@
         <template v-slot:prepend>
           <v-icon icon="mdi-translate"></v-icon>
         </template>
-        <v-list-item-title> Language </v-list-item-title>
+        <v-list-item-title>{{ $t("Language") }} </v-list-item-title>
       </v-list-item>
     </template>
     <v-card>
@@ -62,10 +62,7 @@
       <v-divider></v-divider>
       <v-card-actions>
         <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-          Close
-        </v-btn>
-        <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-          Save
+          {{ $t("Close") }}
         </v-btn>
       </v-card-actions>
     </v-card>

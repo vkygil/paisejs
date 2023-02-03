@@ -23,9 +23,9 @@
 
           <v-list>
             <v-list-item v-for="(item, i) in menuItems" :key="i">
-              <v-list-item-title @click="menuItemClicked(item.title)">{{
-                item.title
-              }}</v-list-item-title>
+              <v-list-item-title @click="menuItemClicked(item.title)">
+                {{ $t(item.title) }}
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -46,7 +46,7 @@
       </v-card> -->
       <v-card class="mx-auto">
         <v-card-actions>
-          <v-btn variant="text"> Transactions </v-btn>
+          <v-btn variant="text"> {{ $t("Transactions") }} </v-btn>
           <v-spacer></v-spacer>
           <v-btn icon="mdi-plus" @click="openTransactionModal()"></v-btn>
         </v-card-actions>
@@ -128,7 +128,7 @@ onMounted(() => {
   console.log(id);
 });
 
-const menuItems = reactive([{ title: "Change Name" }, { title: "Remove" }]);
+const menuItems = reactive([{ title: "Change name" }, { title: "Remove" }]);
 const menuItemClicked = (i) => {
   if (i == "Change Name") {
     let person = prompt("Please enter your name", "Harry Potter");

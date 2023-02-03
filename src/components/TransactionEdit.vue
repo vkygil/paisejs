@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent max-width="444">
       <v-card>
         <v-card-title>
-          <span class="text-h5">Add transaction</span>
+          <span class="text-h5"> {{ $t("Add transaction") }}</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -22,14 +22,14 @@
                       value="borrow"
                       @click="transaction.type = 'borrow'"
                     >
-                      Take
+                      {{ $t("Take") }}
                     </v-btn>
                     <v-btn
                       value="lend"
                       prepend-icon="mdi-arrow-up-bold"
                       @click="transaction.type = 'lend'"
                     >
-                      Give
+                      {{ $t("Give") }}
                     </v-btn>
                   </v-btn-toggle>
                   <v-spacer></v-spacer>
@@ -37,40 +37,42 @@
 
                 <v-text-field
                   v-model="transaction.amount"
-                  label="Amount"
-                  suffix="€" 
+                  :label="$t('Amount')"
+                  suffix="€"
                   min="0"
-                  inputmode="decimal" 
+                  inputmode="decimal"
                   :hide-details="amountError"
-                  :error-messages="amountError?'':'Please write the amount correctly'"
+                  :error-messages="
+                    amountError ? '' : $t('Please write the amount correctly')
+                  "
                 ></v-text-field>
                 <v-divider></v-divider>
                 <v-text-field
                   v-model="transaction.date"
                   type="date"
-                  label="Date"
+                  :label="$t('Date')"
                   hide-details
                 ></v-text-field>
                 <v-divider></v-divider>
                 <v-textarea
                   v-model="transaction.message"
-                  label="Message"
+                  :label="$t('Message')"
                   maxlength="220"
                 ></v-textarea>
-              </v-col> 
+              </v-col>
             </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-btn color="red-darken-1" variant="text" @click="remove">
-            Delete
+            {{ $t("Delete") }}
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
-            Close
+            {{ $t("Close") }}
           </v-btn>
           <v-btn color="blue-darken-1" variant="text" @click="save">
-            Save
+            {{ $t("Save") }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -78,7 +80,7 @@
   </v-row>
 </template>
 <script setup>
-import { reactive, ref, defineEmits ,computed} from "vue";
+import { reactive, ref, defineEmits, computed } from "vue";
 
 const emit = defineEmits(["save", "remove"]);
 
@@ -91,12 +93,12 @@ const transaction = reactive({
   type: "borrow",
 });
 
-const amountError = computed(()=>{
-  return /^(?!0*[.,]?0+$)\d*[.,]?\d+$/.test(transaction.amount) 
-})
+const amountError = computed(() => {
+  return /^(?!0*[.,]?0+$)\d*[.,]?\d+$/.test(transaction.amount);
+});
 
-const save = () => { 
-  transaction.amount = transaction.amount.replace(",",".")
+const save = () => {
+  transaction.amount = transaction.amount.replace(",", ".");
   dialog.value = false;
   emit("save", { ...transaction });
 };

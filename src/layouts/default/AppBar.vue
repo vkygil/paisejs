@@ -60,7 +60,7 @@
         <template v-slot:prepend>
           <v-icon icon="mdi-export"></v-icon>
         </template>
-        <v-list-item-title> Export data</v-list-item-title>
+        <v-list-item-title> {{ $t("Export data") }}</v-list-item-title>
       </v-list-item>
       <SelectLanguage />
       <v-list-item
@@ -70,7 +70,7 @@
         <template v-slot:prepend>
           <v-icon color="red" icon="mdi-delete-alert"></v-icon>
         </template>
-        <v-list-item-title> Clean data</v-list-item-title>
+        <v-list-item-title>  {{ $t("Clear data") }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
