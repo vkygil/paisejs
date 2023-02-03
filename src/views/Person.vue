@@ -217,8 +217,7 @@ const getOweTextByAmount = (t) => {
 //   console.log("diablo");
 // });
 </script>
-<style>
-</style>
+
 <style>
 .header {
   background: linear-gradient(45deg, #d5cea3, #e5e5cb);
