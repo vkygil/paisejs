@@ -62,14 +62,7 @@
         </template>
         <v-list-item-title> Export data</v-list-item-title>
       </v-list-item>
-
-      <v-list-item link>
-        <template v-slot:prepend>
-          <v-icon icon="mdi-translate"></v-icon>
-        </template>
-        <v-list-item-title> Language</v-list-item-title>
-      </v-list-item>
-
+      <SelectLanguage />
       <v-list-item
         link
         onclick='localStorage.removeItem("paisejs");location.reload()'
@@ -84,6 +77,8 @@
 </template>
 
 <script setup>
+import SelectLanguage from "../../components/SelectLanguage.vue";
+
 import { ref } from "vue";
 import { useBookStore } from "@/store/app2";
 const store = useBookStore();

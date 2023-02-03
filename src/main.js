@@ -12,6 +12,7 @@ import { registerPlugins } from '@/plugins'
 import { messages } from './i18n.js' 
 console.log(messages);
 const i18n = createI18n({
+    legacy:false,
     locale: 'es', // set locale
     fallbackLocale: 'en', // set fallback locale
     messages,
