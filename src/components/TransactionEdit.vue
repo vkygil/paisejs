@@ -38,6 +38,7 @@
                 <v-text-field
                   v-model="transaction.amount"
                   :label="$t('Amount')"
+                  type="number"
                   suffix="€"
                   min="0"
                   inputmode="decimal"
@@ -64,7 +65,7 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="red-darken-1" variant="text" @click="remove">
+          <v-btn v-if="!isNew" color="red-darken-1" variant="text" @click="remove">
             {{ $t("Delete") }}
           </v-btn>
           <v-spacer></v-spacer>
@@ -85,6 +86,9 @@ import { reactive, ref, defineEmits, computed } from "vue";
 const emit = defineEmits(["save", "remove"]);
 
 const dialog = ref(false);
+
+const isNew = ref(false)
+
 const transaction = reactive({
   id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
   amount: 0,
@@ -117,6 +121,7 @@ const open = (t) => {
       type: "borrow",
     });
   }
+  isNew.value = !t
 };
 const remove = () => {
   dialog.value = false;

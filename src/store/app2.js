@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, watch, computed, watchEffect, onMounted } from "vue";
+import { reactive, watch, onMounted } from "vue";
+import { useRouter } from 'vue-router';
+
 
 export const useBookStore = defineStore('book', () => {
+  const router = useRouter()
   //refs 
   const book = reactive([])
   const appPreference = reactive([])
@@ -21,11 +24,8 @@ export const useBookStore = defineStore('book', () => {
       book.push({
         name: person, total: 0, transactions: []
       })
+      router.push(`/person/${person}`)
     }
-  }
-
-  const getLS = () => {
-    return JSON.parse(localStorage.getItem("paisejs"))
   }
 
   //funcions
