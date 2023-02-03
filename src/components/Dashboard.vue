@@ -85,18 +85,32 @@
       </v-container>
     </v-main>
   </v-app>
+
+  <pre id="log">asd</pre>
 </template>
-  
+
 <script setup>
 import { reactive, ref, computed, watch, onMounted } from "vue";
 import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
-onMounted(() => {
-  console.log(filteredBook.value.postive);
-  console.log(filteredBook.value.postive.length);
-  console.log(filteredBook.value.postive.reduce((a, b) => console.log(a), 0));
+function consoleLog(data) {
+  var logElement = document.getElementById("log");
+  logElement.innerHTML += data + "\n";
+}
+
+onMounted(async () => {
+  const props = ["name", "email", "tel", "address", "icon"];
+  const opts = { multiple: false };
+
+  try {
+    const contacts = await navigator.contacts.select(props, opts);
+    consoleLog(contacts);
+  } catch (ex) {
+    consoleLog(ex);
+    // Handle any errors here.
+  }
 });
 let filter = ref("");
 let overlay = ref(true);
