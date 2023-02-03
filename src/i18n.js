@@ -2,14 +2,14 @@
 let str = `
 en                                 ;;  es                                             ;; cat                                          ;; pun                                
 Total accounts                     ;;  Total de cuentas                               ;; Total de comptes                             ;; ਕੁੱਲ ਖਾਤੇ
-I owe them                         ;;  les debo                                       ;; els dec                                      ;; ਮੈਂ ਉਨ੍ਹਾਂ ਦਾ ਕਰਜ਼ਦਾਰ ਹਾਂ                                 
-They owe me                        ;;  me deben                                       ;; em deuen                                     ;; ਉਹ ਮੈਨੂੰ ਦੇਣਦਾਰ ਹਨ                                   
+I owe them                         ;;  Les debo                                       ;; els dec                                      ;; ਮੈਂ ਉਨ੍ਹਾਂ ਦਾ ਕਰਜ਼ਦਾਰ ਹਾਂ                                 
+They owe me                        ;;  Me deben                                       ;; em deuen                                     ;; ਉਹ ਮੈਨੂੰ ਦੇਣਦਾਰ ਹਨ                                   
 Search people                      ;;  Buscar personas                                ;; Buscar persones                              ;; ਲੋਕਾਂ ਦੀ ਖੋਜ ਕਰੋ                                                   
 Language                           ;;  Idioma                                         ;; Idioma                                       ;; ਭਾਸ਼ਾ                            
 Clear data                         ;;  Borrar datos                                   ;; Esborrar dades                               ;; ਡਾਟਾ ਸਾਫ਼ ਕਰੋ                                            
 Export data                        ;;  Exportar datos                                 ;; Exportar dades                               ;; ਡਾਟਾ ਨਿਰਯਾਤ ਕਰੋ                                               
 Transactions                       ;;  Transacciones                                  ;; Transaccions                                 ;; ਲੈਣ-ਦੇਣ                                             
-to give                            ;;  para darle                                     ;; per donar-li                                 ;; ਨੂੰ ਦੇਣ ਲਈ                                     
+to give                            ;;  Para darle                                     ;; per donar-li                                 ;; ਨੂੰ ਦੇਣ ਲਈ                                     
 Change name                        ;;  Cambiar nombre                                 ;; Canviar nom                                  ;; ਨਾਮ ਬਦਲੋ                                            
 Remove                             ;;  Eliminar                                       ;; Eliminar                                     ;; ਹਟਾਓ                              
 Please enter the person's name     ;;  Por favor, introduzca el nombre de la persona. ;; Si us plau, introduïu el nom de la persona.  ;; ਕਿਰਪਾ ਕਰਕੇ ਵਿਅਕਤੀ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ                                                                                                                               
@@ -19,9 +19,9 @@ Amount                             ;;  Cantidad                                 
 Date                               ;;  Fecha                                          ;; Data                                         ;; ਤਾਰੀਖ਼                     
 Message                            ;;  Mensaje                                        ;; Missatge                                     ;; ਸੁਨੇਹਾ                              
 Delete                             ;;  Borrar                                         ;; Esborrar                                     ;; ਮਿਟਾਓ                            
-Close                              ;;  Cerca                                          ;; A prop                                       ;; ਬੰਦ ਕਰੋ                        
-Save                               ;;  Salvar                                         ;; Salvar                                       ;; ਸੇਵ ਕਰੋ                        
-Add transaction                    ;;  añadir transacción                             ;; Afegir transacció                            ;; ਲੈਣ-ਦੇਣ ਸ਼ਾਮਲ ਕਰੋ                                                          
+Close                              ;;  Cerrar                                          ;; A prop                                       ;; ਬੰਦ ਕਰੋ                        
+Save                               ;;  Guardar                                         ;; Salvar                                       ;; ਸੇਵ ਕਰੋ                        
+Add transaction                    ;;  Añadir transacción                             ;; Afegir transacció                            ;; ਲੈਣ-ਦੇਣ ਸ਼ਾਮਲ ਕਰੋ                                                          
 Change name                        ;;Cambiar nombre                                   ;; Canviar nom                                  ;;  Naam badlna
 Please write the amount correctly  ;; Por favor escriba la cantidad correctamente     ;;Escriviu correctament l'import                ;; ਕਿਰਪਾ ਕਰਕੇ ਰਕਮ ਸਹੀ ਲਿਖੋ
 `
