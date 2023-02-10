@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-main>
+    <v-main v-if="book.length">
       <v-card class="mx-auto" color="transparent" max-width="400">
         <v-card theme="light" class="ma-4 creamyBack pa-1" max-width="400" dark>
           <div class="d-flex mb-2">
@@ -49,7 +49,7 @@
       </v-card>
       <v-container class="py-8 px-6" fluid>
         <v-row>
-          <v-col cols="12">
+          <v-col cols="12" v-if="filteredBook.postive.length">
             <v-card>
               <v-list lines="two">
                 <v-list-subheader>{{ $t("I owe them") }}</v-list-subheader>
@@ -65,7 +65,7 @@
               </v-list>
             </v-card>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" v-if="filteredBook.negative.length">
             <v-card>
               <v-list lines="two">
                 <v-list-subheader>{{ $t("They owe me") }}</v-list-subheader>
@@ -84,6 +84,15 @@
         </v-row>
       </v-container>
     </v-main>
+    <v-main v-if="book.length == 0">
+      <div class="d-flex">
+        <v-spacer></v-spacer
+        ><v-img src="../assets/arrow.svg" width="20"> </v-img>
+      </div>
+      <div class="d-flex justify-center">
+        <p class="text-h6">Click here to add new person</p>
+      </div>
+    </v-main>
   </v-app>
 </template>
   
@@ -93,13 +102,17 @@ import { useBookStore } from "@/store/app2";
 import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
-onMounted(() => {
-  console.log(filteredBook.value.postive);
-  console.log(filteredBook.value.postive.length);
-  console.log(filteredBook.value.postive.reduce((a, b) => console.log(a), 0));
+onMounted(async () => {
+  // const props = ['name', 'email', 'tel', 'address', 'icon'];
+  // const opts = {multiple: false};
+  // try {
+  //   const contacts = await navigator.contacts.select(props, opts);
+  //   handleResults(contacts);
+  // } catch (ex) {
+  //   // Handle any errors here.
+  // }
 });
 let filter = ref("");
-let overlay = ref(true);
 const filteredBook = computed(() => {
   let fbook = book.value.filter((x) =>
     x.name.toLowerCase().includes(filter.value.toLowerCase())

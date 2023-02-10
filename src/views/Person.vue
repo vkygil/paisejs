@@ -130,7 +130,7 @@ onMounted(() => {
 
 const menuItems = reactive([{ title: "Change name" }, { title: "Remove" }]);
 const menuItemClicked = (i) => {
-  if (i == "Change Name") {
+  if (i == "Change name") {
     let person = prompt("Please enter your name", "Harry Potter");
     if (person != null) cPerson.name = person;
   }

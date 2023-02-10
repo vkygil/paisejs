@@ -19,7 +19,7 @@ export const useBookStore = defineStore('book', () => {
 
   //actions
   const addPerson = () => {
-    let person = prompt("Please enter the person's name", "Singh");
+    let person = prompt("Please enter the person's name", "");
     if (person != null) {
       book.push({
         name: person, total: 0, transactions: []

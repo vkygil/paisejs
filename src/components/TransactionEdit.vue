@@ -2,9 +2,15 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="444">
       <v-card>
-        <v-card-title>
-          <span class="text-h5"> {{ $t("Add transaction") }}</span>
-        </v-card-title>
+        <div class="d-flex">
+          <v-spacer></v-spacer>
+
+          <v-card-title> 
+            <span class="text-h5"> {{ $t("Add transaction") }}</span>
+          </v-card-title>
+          <v-spacer></v-spacer>
+
+        </div>
         <v-card-text>
           <v-container>
             <v-row>
