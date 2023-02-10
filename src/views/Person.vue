@@ -33,6 +33,9 @@
       <v-card-text class="text-h4">
         {{ Math.abs(total) }}€ {{ getOweTextByAmount(total) }}
       </v-card-text>
+      <v-card-text class="text-h6">
+        {{ cPerson.tel }}
+      </v-card-text>
     </v-card>
     <v-card class="ma-2 pa-2" variantZ="tonal">
       <!-- <v-card flat>

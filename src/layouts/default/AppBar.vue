@@ -73,11 +73,13 @@
         <v-list-item-title>  {{ $t("Clear data") }}</v-list-item-title>
       </v-list-item>
     </v-list>
+  <AddPerson></AddPerson>
   </v-navigation-drawer>
 </template>
 
 <script setup>
 import SelectLanguage from "../../components/SelectLanguage.vue";
+import AddPerson from "../../components/AddPerson.vue";
 
 import { ref } from "vue";
 import { useBookStore } from "@/store/app2";

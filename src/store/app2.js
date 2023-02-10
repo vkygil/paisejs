@@ -18,7 +18,19 @@ export const useBookStore = defineStore('book', () => {
   })
 
   //actions
-  const addPerson = () => {
+  const addPerson = (person) => {
+    console.log(person);
+    if (person != null) {
+      book.push({
+        name: person.name,
+        tel: person.tel,
+        total: 0,
+        transactions: []
+      })
+      // router.push(`/person/${person.name}`)
+    }
+  }
+  const addPersonOld = () => {
     let person = prompt("Please enter the person's name", "");
     if (person != null) {
       book.push({
