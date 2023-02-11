@@ -20,8 +20,8 @@
     <v-spacer></v-spacer>
 
     <!-- <v-btn @click="saveBook" variant="text" icon="mdi-content-save-all"></v-btn> -->
-    <v-btn @click="addPerson" variant="text" icon="mdi-account-plus"></v-btn>
-
+    <!-- <v-btn @click="addPerson" variant="text" icon="mdi-account-plus"></v-btn> -->
+    <AddPerson></AddPerson>
     <!-- <v-btn variant="text" icon="mdi-filter"></v-btn>
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
@@ -72,8 +72,7 @@
         </template>
         <v-list-item-title>  {{ $t("Clear data") }}</v-list-item-title>
       </v-list-item>
-    </v-list>
-  <AddPerson></AddPerson>
+    </v-list> 
   </v-navigation-drawer>
 </template>
 

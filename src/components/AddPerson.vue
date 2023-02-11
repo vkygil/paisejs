@@ -1,8 +1,9 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" persistent>
+    <v-dialog v-model="dialog">
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
+        <v-btn v-bind="props" variant="text" icon="mdi-account-plus"></v-btn>
+        <!-- <v-btn color="primary" v-bind="props"> Open Dialog </v-btn> -->
       </template>
       <v-card>
         <v-card-title>
@@ -60,12 +61,20 @@
             Close
           </v-btn>
           <v-btn color="blue-darken-1" variant="text" @click="savePerson">
-            Save
+            Add
           </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
+  <v-snackbar v-model="snackbar.state">
+    {{ snackbar.text }}
+    <template v-slot:action="{ attrs }">
+      <v-btn color="pink" text v-bind="attrs" @click="snackbar.state = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 <script setup>
 import { onMounted, ref, reactive } from "vue";
@@ -75,14 +84,25 @@ const { locale } = useI18n();
 const store = useBookStore();
 const addPerson = store.addPerson;
 
-let dialog = ref(true);
+let snackbar = reactive({
+  state: true,
+  text: "Hello!",
+});
+let dialog = ref(false);
 let formData = reactive({
   name: "",
   tel: "",
 });
 onMounted(() => {});
 function savePerson() {
-  addPerson(formData);
+  if (formData.name !== "" && formData.tel !== "") {
+    addPerson(formData);
+    dialog.value = false;
+    formData.name = "";
+    formData.tel = "";
+  }else{
+    alert("Put the data correctly")
+  }
 }
 async function selectContact() {
   const props = ["name", "tel"];
@@ -92,7 +112,9 @@ async function selectContact() {
     data.name = contacts.name[0];
     data.tel = contacts.tel[0];
   } catch (ex) {
-    alert("tu navegador no deja elejirt contactos\n" + ex);
+    snackbar.state = true;
+    snackbar.text = "tu navegador no deja elejirt contactos\n" + ex;
+    // alert("tu navegador no deja elejirt contactos\n" + ex);
     // Handle any errors here.
   }
 }
