@@ -7,7 +7,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">Add person</span>
+          <span class="text-h5">Add personx</span>
         </v-card-title>
         <v-card-text>
           <!-- <v-container> -->
@@ -95,13 +95,13 @@ let formData = reactive({
 });
 onMounted(() => {});
 function savePerson() {
-  if (formData.name !== "" && formData.tel !== "") {
+  if (formData.name !== "") {
     addPerson(formData);
     dialog.value = false;
     formData.name = "";
     formData.tel = "";
-  }else{
-    alert("Put the data correctly")
+  } else {
+    alert("Put the data correctly");
   }
 }
 async function selectContact() {
@@ -109,8 +109,9 @@ async function selectContact() {
   const opts = { multiple: false };
   try {
     const contacts = await navigator.contacts.select(props, opts);
-    data.name = contacts.name[0];
-    data.tel = contacts.tel[0];
+
+    formData.name = contacts[0].name[0];
+    formData.tel = contacts[0].tel[0];
   } catch (ex) {
     snackbar.state = true;
     snackbar.text = "tu navegador no deja elejirt contactos\n" + ex;
@@ -118,4 +119,4 @@ async function selectContact() {
     // Handle any errors here.
   }
 }
-</script> 
+</script>
