@@ -1,14 +1,14 @@
 {
   "name": "Paise - who owes me",
   "short_name": "Paise",
-  "start_url": "index.html",
+  "start_urlx": "index.html",
   "display": "standalone",
-  "background_color": "brown",
-  "theme_color": "brown",
+  "background_color": "#1A120B",
+  "theme_color": "#1A120B",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "favicon.svg",
       "sizes": "48x48 72x72 96x96 128x128 256x256",
       "type": "image/svg+xml",
       "purpose": "any"
