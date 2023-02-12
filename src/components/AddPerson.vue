@@ -57,6 +57,9 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
+          <v-btn color="blue-darken-1" variant="text" @click="testt">
+            test
+          </v-btn>
           <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
             Close
           </v-btn>
@@ -94,6 +97,21 @@ let formData = reactive({
   tel: "",
 });
 onMounted(() => {});
+
+function testt(){
+  const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test( userAgent );
+  }
+  // Detects if device is in standalone mode
+  const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+  // Checks if should display install popup notification:
+  if (isIos() && !isInStandaloneMode()) {
+    this.setState({ showInstallMessage: true });
+  }
+}
+
 function savePerson() {
   if (formData.name !== "") {
     addPerson(formData);
