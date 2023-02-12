@@ -106,7 +106,8 @@ function testt(){
 
   // Checks if should display install popup notification:
   if (isIos() && !isInStandaloneMode()) {
-    this.setState({ showInstallMessage: true });
+    alert("Show install to homescreen")
+    // this.setState({ showInstallMessage: true });
   }
 }
 
