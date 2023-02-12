@@ -1,5 +1,4 @@
-<template>
-  <v-row justify="center">
+<template> 
     <v-dialog v-model="dialog">
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" variant="text" icon="mdi-account-plus"></v-btn>
@@ -68,8 +67,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
-  </v-row>
+    </v-dialog> 
   <v-snackbar v-model="snackbar.state">
     {{ snackbar.text }}
     <template v-slot:action="{ attrs }">
