@@ -25,7 +25,7 @@
     <!-- <v-btn variant="text" icon="mdi-filter"></v-btn>
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer">
+  <v-navigation-drawer v-model="drawer"  :touchless="route.path!='/'"  >
     <!-- <v-sheet color="grey-lighten-4" class="pa-4">
       <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
       <div>Me</div>
@@ -70,22 +70,24 @@
         <template v-slot:prepend>
           <v-icon color="red" icon="mdi-delete-alert"></v-icon>
         </template>
-        <v-list-item-title>  {{ $t("Clear data") }}</v-list-item-title>
+        <v-list-item-title> {{ $t("Clear data") }}</v-list-item-title>
       </v-list-item>
-    </v-list> 
+    </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup>
 import SelectLanguage from "../../components/SelectLanguage.vue";
 import AddPerson from "../../components/AddPerson.vue";
+import { useRoute } from 'vue-router';
 
 import { ref } from "vue";
 import { useBookStore } from "@/store/app2";
 const store = useBookStore();
+const route = useRoute()
+console.log(route.value );
 const addPerson = store.addPerson;
 const saveBook = store.saveBook;
-
 const drawer = ref(false);
 const dataSavePreference = ref("offline");
 </script>

@@ -109,6 +109,7 @@ const amountError = computed(() => {
 
 const save = () => {
   transaction.amount = transaction.amount.replace(",", ".");
+  transaction.amount = Number(transaction.amount).toString()
   dialog.value = false;
   emit("save", { ...transaction });
 };
