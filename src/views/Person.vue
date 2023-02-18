@@ -73,7 +73,7 @@
                   :color="transaction.type == 'borrow' ? 'success' : 'chip'"
                   text-color="white"
                 >
-                {{transaction.type == 'borrow' ? 'Le has dado' :  "Te ha dado"}}  {{ transaction.amount }}€
+                {{transaction.type == 'borrow' ? 'Te ha dado' :  "Le has dado"}}  {{ transaction.amount }}€
                 </v-chip>
                 <div class="d-flex flex-column align-end">
                   <span>

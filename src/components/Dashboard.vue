@@ -144,6 +144,7 @@ const fbReducer = (a, b) => b.total + a;
   background: rgb(var(--v-theme-cream)) !important;
   /* background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important; */
 }
-.img-overlay {
+.text-secondary-1 { 
+  color: rgb(var(--v-theme-text-secondary-1)) !important
 }
 </style>
