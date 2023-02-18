@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" scrollable>
+  <v-dialog v-model="dialog" scrollable  transition="scroll-y-reverse-transition" >
     <template v-slot:activator="{ props }">
       <v-list-item link v-bind="props">
         <template v-slot:prepend>
@@ -17,7 +17,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="https://flagsapi.com/US/flat/64.png"></v-img
+                  <v-img src="../assets/flags/us.png"></v-img
                 ></v-icon>
                 English
               </div>
@@ -27,7 +27,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="https://flagsapi.com/ES/flat/64.png"></v-img
+                  <v-img src="../assets/flags/es.png"></v-img
                 ></v-icon>
                 Español
               </div>
@@ -37,9 +37,8 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Estelada_blava.svg/1920px-Estelada_blava.svg.png"
-                  ></v-img
+                  <v-img src="../assets/flags/cat.png"></v-img
+
                 ></v-icon>
                 Catalan
               </div>
@@ -49,9 +48,8 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img
-                    src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Nishan_Sahib.svg"
-                  ></v-img
+                  <v-img src="../assets/flags/pun.jpg"></v-img
+
                 ></v-icon>
                 Punjabi
               </div>

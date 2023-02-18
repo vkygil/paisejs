@@ -63,6 +63,7 @@
         <v-list-item-title> {{ $t("Export data") }}</v-list-item-title>
       </v-list-item>
       <SelectLanguage />
+      <SelectTheme/>
       <v-list-item
         link
         onclick='localStorage.removeItem("paisejs");location.reload()'
@@ -78,6 +79,7 @@
 
 <script setup>
 import SelectLanguage from "../../components/SelectLanguage.vue";
+import SelectTheme from "../../components/SelectTheme.vue";
 import AddPerson from "../../components/AddPerson.vue";
 import { useRoute } from 'vue-router';
 
@@ -93,6 +95,7 @@ const dataSavePreference = ref("offline");
 </script>
 <style>
 .creamyBack {
-  background: linear-gradient(45deg, #d5cea3, #e5e5cb);
+  
+  /* background: linear-gradient(45deg, #d5cea3, #e5e5cb); */
 }
 </style>

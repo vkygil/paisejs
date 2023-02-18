@@ -31,7 +31,7 @@
         </v-menu>
       </v-card-title>
       <v-card-text class="text-h4">
-        {{ Math.abs(total) }}€ {{ getOweTextByAmount(total) }}
+      <span class="text-h4">  {{ $t( getOweTextByAmount(total)) }} </span>  {{ Math.abs(total).toFixed(2) }}€ {{ " "  }}
       </v-card-text>
       <v-card-text class="text-caption py-0">
         {{ cPerson.tel }}
@@ -61,7 +61,7 @@
           v-for="year in Object.keys(transactionsComputed).reverse()"
           :key="year"
         >
-          <v-list-subheader>{{ year }}</v-list-subheader>
+          <v-list-subheader class="d-flex justify-end" >{{ year }}</v-list-subheader>
           <template
             v-for="transaction in transactionsComputed[year]"
             :key="transaction.id"
@@ -70,7 +70,7 @@
               <div class="d-flex justify-space-between">
                 <v-chip
                   class="ma-0"
-                  :color="transaction.type == 'borrow' ? 'green' : 'yellow'"
+                  :color="transaction.type == 'borrow' ? 'success' : 'yellow'"
                   text-color="white"
                 >
                   {{ transaction.amount }}€
@@ -131,7 +131,7 @@ onMounted(() => {
   console.log(id);
 });
 
-const menuItems = reactive([{ title: "Change name" }, { title: "Remove" }]);
+const menuItems = reactive([{ title: "Change name" },  { title: "Remind me (coming soon)" }, { title: "Remind him" }, { title: "Remove" }]);
 const menuItemClicked = (i) => {
   if (i == "Change name") {
     let person = prompt("Please enter your name", "Harry Potter");
@@ -208,11 +208,11 @@ watch(total, (currentValue) => {
 const getOweTextByAmount = (t) => {
   switch (true) {
     case t > 0:
-      return "to give";
+      return "you owe";
     case t == 0:
       return "";
     case t < 0:
-      return "to take";
+      return "owes you";
   }
   return "test";
 };

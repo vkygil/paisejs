@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-main v-if="book.length">
-      <v-card class="mx-auto" color="transparent" max-width="400">
+      <v-card class="mx-auto" color="transparent" max-width="400" flat>
         <v-card theme="light" class="ma-4 creamyBack pa-1" max-width="400" dark>
           <div class="d-flex mb-2">
             <v-spacer></v-spacer>
@@ -18,7 +18,7 @@
               rounded="pill"
               size="small"
               >{{ $t("I owe them") }}
-              {{ filteredBook.postive.reduce(fbReducer, 0) }}€
+              {{ filteredBook.postive.reduce(fbReducer, 0).toFixed(2) }}€
             </v-btn>
             <v-spacer></v-spacer>
             <v-btn
@@ -28,13 +28,13 @@
               rounded="pill"
               size="small"
               >{{ $t("They owe me") }}
-              {{ filteredBook.negative.reduce(fbReducer, 0) }}€
+              {{ filteredBook.negative.reduce(fbReducer, 0).toFixed(2) }}€
             </v-btn>
             <v-spacer></v-spacer>
           </div>
         </v-card>
       </v-card>
-      <v-card class="mx-auto" color="transparent" max-width="400">
+      <v-card class="mx-auto" color="transparent" max-width="400" flat>
         <v-card-text>
           <v-text-field
             density="compact"
@@ -47,20 +47,25 @@
           ></v-text-field>
         </v-card-text>
       </v-card>
-      <v-container class="py-8 px-6" fluid>
+      <v-container class="py-8 px-5" fluid>
         <v-row>
           <v-col cols="12" v-if="filteredBook.postive.length">
             <v-card>
               <v-list lines="two">
-                <v-list-subheader>{{ $t("I owe them") }}</v-list-subheader>
+                <v-list-subheader>{{
+                  $t("You owe money to these people")
+                }}</v-list-subheader>
                 <template v-for="t in filteredBook.postive" :key="t.name">
+                  <v-divider></v-divider>
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
-                    <v-list-item-subtitle class="text-green-lighten-1">
-                      <strong> {{ t.total }}€ </strong>
+                    <v-list-item-subtitle class="text-success">
+                      <strong> {{ t.total.toFixed(2) }}€ </strong>
                     </v-list-item-subtitle>
                   </v-list-item>
-                  <v-divider></v-divider>
+                  <!-- <v-divider
+                    v-if="i < filteredBook.negative.length - 1"
+                  ></v-divider> -->
                 </template>
               </v-list>
             </v-card>
@@ -68,15 +73,21 @@
           <v-col cols="12" v-if="filteredBook.negative.length">
             <v-card>
               <v-list lines="two">
-                <v-list-subheader>{{ $t("They owe me") }}</v-list-subheader>
+                <v-list-subheader>{{
+                  $t("These people owe money to you")
+                }}</v-list-subheader>
                 <template v-for="t in filteredBook.negative" :key="t.name">
+                  <v-divider></v-divider>
+
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
                     <v-list-item-subtitle class="text-yellow-lighten-1">
-                      <strong> {{ t.total }}€ </strong>
+                      <strong> {{ t.total.toFixed(2) }}€ </strong>
                     </v-list-item-subtitle>
                   </v-list-item>
-                  <v-divider></v-divider>
+                  <!-- <v-divider
+                    v-if="i < filteredBook.negative.length - 1"
+                  ></v-divider> -->
                 </template>
               </v-list>
             </v-card>
@@ -103,6 +114,7 @@ import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
 onMounted(async () => {
+  // theme.global.name.value = "light"
   // const props = ['name', 'email', 'tel', 'address', 'icon'];
   // const opts = {multiple: false};
   // try {
@@ -129,8 +141,8 @@ const fbReducer = (a, b) => b.total + a;
 .creamyBack {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important;
-  /* background: #3c2a21; */
+  background: rgb(var(--v-theme-cream)) !important;
+  /* background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important; */
 }
 .img-overlay {
 }

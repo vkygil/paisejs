@@ -1,12 +1,12 @@
 <template> 
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialog"  transition="scroll-y-reverse-transition" max-width="600px" >
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" variant="text" icon="mdi-account-plus"></v-btn>
         <!-- <v-btn color="primary" v-bind="props"> Open Dialog </v-btn> -->
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">Add personx</span>
+          <span class="text-h5">Add person</span>
         </v-card-title>
         <v-card-text>
           <!-- <v-container> -->
@@ -14,7 +14,7 @@
             >the Location Services</a
           > -->
 
-          <v-col cols="12" sm="6" md="4">
+          <v-col  >
             <div class="d-flex align-center">
               <v-spacer></v-spacer>
               <v-btn
@@ -28,7 +28,7 @@
               <v-spacer></v-spacer>
             </div>
           </v-col>
-          <v-col cols="12" sm="6" md="4">
+          <v-col >
             <div class="d-flex align-center">
               <v-divider></v-divider>
               <p class="px-3">or</p>
@@ -36,7 +36,7 @@
             </div>
           </v-col>
           <v-row>
-            <v-col cols="12" sm="6" md="4">
+            <v-col >
               <v-text-field
                 append-inner-icon="mdi-account"
                 label="Name"
@@ -56,9 +56,9 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue-darken-1" variant="text" @click="testt">
+          <!-- <v-btn color="blue-darken-1" variant="text" @click="testt">
             test
-          </v-btn>
+          </v-btn> -->
           <v-btn color="blue-darken-1" variant="text" @click="dialog = false">
             Close
           </v-btn>
@@ -86,7 +86,7 @@ const store = useBookStore();
 const addPerson = store.addPerson;
 
 let snackbar = reactive({
-  state: true,
+  state: false,
   text: "Hello!",
 });
 let dialog = ref(false);

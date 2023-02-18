@@ -5,11 +5,10 @@
         <div class="d-flex">
           <v-spacer></v-spacer>
 
-          <v-card-title> 
+          <v-card-title>
             <span class="text-h5"> {{ $t("Add transaction") }}</span>
           </v-card-title>
           <v-spacer></v-spacer>
-
         </div>
         <v-card-text>
           <v-container>
@@ -24,19 +23,25 @@
                     group
                   >
                     <v-btn
+                      class="d-flex flex-column"
                       prepend-icon="mdi-arrow-down-bold"
                       value="borrow"
                       @click="transaction.type = 'borrow'"
                     >
-                      {{ $t("Take") }}
+                      {{ $t("Take money") }}
                     </v-btn>
                     <v-btn
+                      class="d-flex flex-column"
                       value="lend"
                       prepend-icon="mdi-arrow-up-bold"
                       @click="transaction.type = 'lend'"
                     >
-                      {{ $t("Give") }}
+                      {{ $t("Give money") }}
                     </v-btn>
+                    <!-- <v-btn class="vertigo">
+                      <v-icon>mdi-heart</v-icon>
+                      <div>Text</div>
+                    </v-btn> -->
                   </v-btn-toggle>
                   <v-spacer></v-spacer>
                 </div>
@@ -71,7 +76,12 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn v-if="!isNew" color="red-darken-1" variant="text" @click="remove">
+          <v-btn
+            v-if="!isNew"
+            color="red-darken-1"
+            variant="text"
+            @click="remove"
+          >
             {{ $t("Delete") }}
           </v-btn>
           <v-spacer></v-spacer>
@@ -87,13 +97,10 @@
   </v-row>
 </template>
 <script setup>
-import { reactive, ref, defineEmits, computed } from "vue";
-
-const emit = defineEmits(["save", "remove"]);
-
-const dialog = ref(false);
-
-const isNew = ref(false)
+import { reactive, ref, defineEmits, computed } from "vue"; 
+const emit = defineEmits(["save", "remove"]); 
+const dialog = ref(false); 
+const isNew = ref(false);
 
 const transaction = reactive({
   id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(),
@@ -109,14 +116,13 @@ const amountError = computed(() => {
 
 const save = () => {
   transaction.amount = transaction.amount.replace(",", ".");
-  transaction.amount = Number(transaction.amount).toString()
+  transaction.amount = Number(transaction.amount).toString();
   dialog.value = false;
   emit("save", { ...transaction });
 };
 const open = (t) => {
   dialog.value = true;
-  // console.log({...t});
-  console.log(t);
+  // console.log({...t}); 
   if (t) {
     Object.assign(transaction, { ...t });
   } else {
@@ -128,7 +134,7 @@ const open = (t) => {
       type: "borrow",
     });
   }
-  isNew.value = !t
+  isNew.value = !t;
 };
 const remove = () => {
   dialog.value = false;
@@ -139,3 +145,9 @@ defineExpose({
   dialog,
 });
 </script>
+<style>
+.vertigo > .v-btn__content {
+  display: flex;
+  flex-direction: column;
+}
+</style>

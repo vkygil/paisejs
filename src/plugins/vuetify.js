@@ -17,22 +17,61 @@ const brownTing = {
     background: '#1A120B',
     surface: '#3C2A21',
     primary: '#3C2A21',
-    'primary-darken-1': '#3700B3', 
+    cream: '#d5cea3',
+    'primary-darken-1': '#3700B3',
     secondary: '#03DAC6',
     'secondary-darken-1': '#018786',
     error: '#B00020',
     error: '#eb2a4d',
     info: '#2196F3',
-    success: '#4CAF50',
+    success: '#66BB6A',
     warning: '#FB8C00',
   }
 }
+const blueTing = {
+  dark: false,
+  colors: {
+    background: '#6096B4',
+    surface: '#93BFCF',
+    primary: '#93BFCF',
+    cream: '#EEE9DA',
+    'primary-darken-1': '#3700B3',
+    secondary: '#03DAC6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    error: '#eb2a4d',
+    info: '#2196F3',
+    success: '#026000',
+    warning: '#FB8C00',
+  }
+}
+
+const julioTing = {
+  dark: true,
+  colors: {
+    background: '#000000',
+    surface: '#212121',
+    primary: '#3E432E',
+    cream: '#EEE9DA',
+    'primary-darken-1': '#3700B3',
+    secondary: '#03DAC6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    error: '#eb2a4d',
+    info: '#2196F3',
+    success: '#66BB6A',
+    warning: '#FB8C00',
+  }
+}
+
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
 export default createVuetify({
   theme: {
-    defaultTheme: "brownTing",
+    defaultTheme: JSON.parse(localStorage.getItem("paisejs_pref"))?.theme || "brownTing",
     themes: {
       brownTing,
+      blueTing,
+      julioTing,
       light: {
 
         dark: false,
