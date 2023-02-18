@@ -70,10 +70,10 @@
               <div class="d-flex justify-space-between">
                 <v-chip
                   class="ma-0"
-                  :color="transaction.type == 'borrow' ? 'success' : 'yellow'"
+                  :color="transaction.type == 'borrow' ? 'success' : 'chip'"
                   text-color="white"
                 >
-                  {{ transaction.amount }}€
+                {{transaction.type == 'borrow' ? 'Le has dado' :  "Te ha dado"}}  {{ transaction.amount }}€
                 </v-chip>
                 <div class="d-flex flex-column align-end">
                   <span>
@@ -223,7 +223,7 @@ const getOweTextByAmount = (t) => {
 
 <style>
 .header {
-  background: linear-gradient(45deg, #d5cea3, #e5e5cb);
+  background:rgb(var(--v-theme-cream))
 }
 .transMessage {
   white-space: nowrap;
@@ -231,6 +231,6 @@ const getOweTextByAmount = (t) => {
   text-overflow: ellipsis;
   max-width: 200px;
   font-size: xx-small;
-  color: rgba(218, 179, 152, 0.8);
+  color: rgb(var(--v-text-secondry-1))
 }
 </style>

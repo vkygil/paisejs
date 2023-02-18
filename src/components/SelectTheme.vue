@@ -39,7 +39,7 @@
                   cover
                   src="../assets/palets/brownTing.png"
                 ></v-img>
-                <span class="pa-2"> Brwonie </span>
+                <span class="pa-2"> Borwnie </span>
               </div>
             </template>
           </v-radio>
@@ -52,7 +52,7 @@
                   cover
                   src="../assets/palets/julioTing.png"
                 ></v-img>
-                <span class="pa-2"> Brwonie </span>
+                <span class="pa-2"> Julioled </span>
               </div>
             </template>
           </v-radio>
