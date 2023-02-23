@@ -17,7 +17,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="../assets/flags/us.png"></v-img
+                  <v-img src="../../assets/flags/us.png"></v-img
                 ></v-icon>
                 English
               </div>
@@ -27,7 +27,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="../assets/flags/es.png"></v-img
+                  <v-img src="../../assets/flags/es.png"></v-img
                 ></v-icon>
                 Español
               </div>
@@ -37,7 +37,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="../assets/flags/cat.png"></v-img
+                  <v-img src="../../assets/flags/cat.png"></v-img
 
                 ></v-icon>
                 Catalan
@@ -48,7 +48,7 @@
             <template v-slot:label>
               <div>
                 <v-icon>
-                  <v-img src="../assets/flags/pun.jpg"></v-img
+                  <v-img src="../../assets/flags/pun.jpg"></v-img
 
                 ></v-icon>
                 Punjabi

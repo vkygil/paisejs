@@ -24,9 +24,9 @@
                   width="140"
                   aspect-ratio="4"
                   cover
-                  src="../assets/palets/blueTing.png"
+                  src="../../assets/palets/blueTing.png"
                 ></v-img>
-                <span class="pa-2"> Azulie </span>
+                <span class="pa-2"> Agua </span>
               </div>
             </template>
           </v-radio>
@@ -37,9 +37,9 @@
                   width="140"
                   aspect-ratio="4"
                   cover
-                  src="../assets/palets/brownTing.png"
+                  src="../../assets/palets/brownTing.png"
                 ></v-img>
-                <span class="pa-2"> Borwnie </span>
+                <span class="pa-2"> Singh</span>
               </div>
             </template>
           </v-radio>
@@ -50,9 +50,9 @@
                   width="140"
                   aspect-ratio="4"
                   cover
-                  src="../assets/palets/julioTing.png"
+                  src="../../assets/palets/julioTing.png"
                 ></v-img>
-                <span class="pa-2"> Julioled </span>
+                <span class="pa-2"> Julio </span>
               </div>
             </template>
           </v-radio>

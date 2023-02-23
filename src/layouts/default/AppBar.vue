@@ -25,7 +25,7 @@
     <!-- <v-btn variant="text" icon="mdi-filter"></v-btn>
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
   </v-app-bar>
-  <v-navigation-drawer v-model="drawer"  :touchless="route.path!='/'"  >
+  <v-navigation-drawer v-model="drawer" :touchless="route.path != '/'">
     <!-- <v-sheet color="grey-lighten-4" class="pa-4">
       <v-avatar class="mb-4" color="grey-darken-1" size="64"></v-avatar>
       <div>Me</div>
@@ -43,18 +43,8 @@
     <v-btn icon="mdi-heart" variant="plain"></v-btn>
   </div>
       </v-list-item> -->
-      <v-list-item>
-        <v-btn-toggle disabled v-model="dataSavePreference" borderless>
-          <v-btn value="offline">
-            <span>Offline</span>
-            <v-icon end> mdi-content-save-all </v-icon>
-          </v-btn>
-          <v-btn value="online">
-            <span>Online</span>
-            <v-icon end> mdi-cloud-sync </v-icon>
-          </v-btn>
-        </v-btn-toggle>
-      </v-list-item>
+
+      <DataSaveSettings></DataSaveSettings>
 
       <v-list-item disabled link>
         <template v-slot:prepend>
@@ -63,7 +53,7 @@
         <v-list-item-title> {{ $t("Export data") }}</v-list-item-title>
       </v-list-item>
       <SelectLanguage />
-      <SelectTheme/>
+      <SelectTheme />
       <v-list-item
         link
         onclick='localStorage.removeItem("paisejs");location.reload()'
@@ -78,24 +68,22 @@
 </template>
 
 <script setup>
-import SelectLanguage from "../../components/SelectLanguage.vue";
-import SelectTheme from "../../components/SelectTheme.vue";
+import SelectLanguage from "../../components/sidebar/SelectLanguage.vue";
+import SelectTheme from "../../components/sidebar/SelectTheme.vue";
+import DataSaveSettings from "../../components/sidebar/DataSaveSettings";
 import AddPerson from "../../components/AddPerson.vue";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
 
-import { ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useBookStore } from "@/store/app2";
 const store = useBookStore();
-const route = useRoute()
-console.log(route.value );
+const route = useRoute(); 
 const addPerson = store.addPerson;
 const saveBook = store.saveBook;
 const drawer = ref(false);
-const dataSavePreference = ref("offline");
 </script>
 <style>
 .creamyBack {
-  
   /* background: linear-gradient(45deg, #d5cea3, #e5e5cb); */
 }
 </style>

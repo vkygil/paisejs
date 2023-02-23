@@ -15,14 +15,18 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
       },
       {
-        path:'/person/:id',
-        name:'person',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Person.vue'),
-    
-      }
+        path: '/person/:id',
+        name: 'person',
+        component: () => import('@/views/Person.vue'),
+      },
     ],
   },
-  
+  {
+    path: '/coming-from-email',
+    name: 'FirebaseRedirect',
+    component: () => import('@/views/FirebaseRedirect.vue'),
+  }
+
 ]
 
 const router = createRouter({

@@ -44,25 +44,42 @@ export const useBookStore = defineStore("book", () => {
   //funcions
   function saveBook() {
     let tosave = {
-      data: "ok",
-      book: book,
+      book: book
     };
     localStorage.setItem("paisejs", JSON.stringify(tosave));
+    console.log("save_data_offline()");
+    if (localStorage.getItem("accessToken")) {
+      fetch("http://localhost:3001/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: localStorage.getItem("accessToken"), book: book }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("save_data_online()");
+          console.log(data);
+        });
+    }
+
+  }
+  
+  let updateBook =(bookc)=>{
+    Object.assign(book, bookc)
   }
 
   //autosave
   let uploadTimeout;
   watch(
     book,
-    (newVal) => {
+    (newVal, oldVal) => {
       clearTimeout(uploadTimeout);
       uploadTimeout = setTimeout(() => {
-        console.log("save_data()");
+        console.log({ ...oldVal });
         saveBook();
       }, 777);
     },
     { deep: true }
   );
 
-  return { book, addPerson, saveBook };
+  return { book, addPerson, saveBook ,updateBook};
 });

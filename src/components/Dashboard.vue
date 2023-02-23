@@ -110,10 +110,15 @@
 <script setup>
 import { reactive, ref, computed, watch, onMounted } from "vue";
 import { useBookStore } from "@/store/app2";
+import { useUserStore } from "@/store/user";
 import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
+let useBookStorex = useUserStore()
+
 onMounted(async () => {
+  console.log(useBookStorex);
+  window.login = useBookStorex.login 
   // theme.global.name.value = "light"
   // const props = ['name', 'email', 'tel', 'address', 'icon'];
   // const opts = {multiple: false};
