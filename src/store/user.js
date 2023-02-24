@@ -9,7 +9,7 @@ import { useBookStore } from "@/store/app2";
 // const updateBook =   ()=>{}
 
 const actionCodeSettings = {
-  url: 'http://localhost:3000/coming-from-email', // URL must be in the authorized domains list in the Firebase Console.   
+  url: 'https://paisejs.vercel.app/coming-from-email', // URL must be in the authorized domains list in the Firebase Console.   
   handleCodeInApp: true,  // This must be true.
   // dynamicLinkDomain: 'http://localhost:3000'
 };
