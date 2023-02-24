@@ -14,6 +14,7 @@ export const useBookStore = defineStore("book", () => {
 
     Object.assign(book, localStorageData?.book || []);
     Object.assign(appPreference, localStorageData2 || { language: "en" });
+    console.log("d");
   });
 
   //actions
@@ -49,7 +50,8 @@ export const useBookStore = defineStore("book", () => {
     localStorage.setItem("paisejs", JSON.stringify(tosave));
     console.log("save_data_offline()");
     if (localStorage.getItem("accessToken")) {
-      fetch("http://localhost:3001/api/book", {
+       fetch("https://paise.onrender.com/api/book", {
+    //  fetch("http://localhost:3001/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: localStorage.getItem("accessToken"), book: book }),

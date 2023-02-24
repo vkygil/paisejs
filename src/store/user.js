@@ -1,12 +1,12 @@
 // Utilities
 import { storeToRefs } from "pinia";
 import { defineStore } from 'pinia'
-import { auth, onAuthStateChanged } from '../firebase'
+import { auth } from '../firebase'
 import { sendSignInLinkToEmail } from "@firebase/auth";
 import { reactive, watch, onMounted } from "vue";
 import { useBookStore } from "@/store/app2";
 
-const updateBook =   useBookStore().updateBook;
+// const updateBook =   ()=>{}
 
 const actionCodeSettings = {
   url: 'http://localhost:3000/coming-from-email', // URL must be in the authorized domains list in the Firebase Console.   
@@ -15,11 +15,14 @@ const actionCodeSettings = {
 };
 
 export const useUserStore = defineStore('user', () => {
+  const updateBook = useBookStore().updateBook;
+
   const user = reactive({
     accessToken: "default",
     mode: "offline",
     ... (JSON.parse(localStorage.getItem('user')) || { accessToken: null, mode: "offline", email: "" })
   })
+
   watch(user, () => {
     console.log("saved user");
     localStorage.setItem("user", JSON.stringify(user));
@@ -32,28 +35,28 @@ export const useUserStore = defineStore('user', () => {
       user.accessToken = userX.accessToken;
       user.email = userX.email;
       localStorage.setItem("accessToken", userX.accessToken);
-
       let book = await getBook(userX.accessToken)
-
+      updateBook(book)
     } else {
       localStorage.removeItem("accessToken");
     }
   })
 
   let getBook = async (token) => {
-    return await fetch("http://localhost:3001/api/getbook", {
+    return await fetch("https://paise.onrender.com/api/getbook", {
+      //   return await fetch("http://localhost:3001/api/getbook", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: token }),
     })
       .then((response) => response.json())
-      .then((data) => { 
+      .then((data) => {
         console.log(data.data.book);
-        updateBook (data.data.book)
+        updateBook(data.data.book)
         // book.value.push(data.data.book[0] )
-        return data.data 
+        return data.data
       });
-  } 
+  }
   let login = async (email) => {
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => window.localStorage.setItem('emailForSignIn', email))
@@ -73,6 +76,6 @@ export const useUserStore = defineStore('user', () => {
     auth.signOut()
   }
 
-  return { user, login, logout };
+  return { user, login, logout, event };
 
 })
