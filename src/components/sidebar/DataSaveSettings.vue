@@ -208,14 +208,13 @@ let atInput = (i) => {
 };
 
 let sendVerificaiton = () => {
-   useBookStorex.login(formData.email);
-  openDataChoice();
+  useBookStorex.login(formData.email); 
   step.value = 2;
 };
 let verifyCode = () => {
   let code = "" + inputs[0] + inputs[1] + inputs[2] + inputs[3];
   // false &&
-    fetch("http://localhost:3001/checkPIN/" + code)
+    fetch("https://paise.onrender.com/checkPIN/" + code)
       .then((response) => response.json())
       .then((data) => {
         console.log(data.href);

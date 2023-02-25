@@ -48,7 +48,7 @@ let pin = ref("");
 onMounted(() => {
   console.log(window.location.href);
 
-  fetch("http://localhost:3001/generatePIN", {
+  fetch("https://paise.onrender.com/generatePIN", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
