@@ -108,13 +108,30 @@
             user.mode = 'offline';
           "
         >
-          {{ $t("Cancel") }}
+          {{ $t("Close") }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+  <v-dialog v-model="dialog2.model" persistent width="auto">
+    <v-card>
+      <v-card-title class="text-h5">
+        Use Google's location service?
+      </v-card-title>
+      <v-card-text>Deseas guardar los.</v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="green-darken-1" variant="text" @click="dialog = false">
+          Disagree
+        </v-btn>
+        <v-btn color="green-darken-1" variant="text" @click="dialog = false">
+          Agree
         </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
-  <script setup>
+<script setup>
 import { reactive, ref, onMounted, watch } from "vue";
 import { useUserStore } from "@/store/user";
 import { auth } from "../../firebase";
@@ -125,10 +142,14 @@ import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 let useBookStorex = useUserStore();
 const user = storeToRefs(useBookStorex).user;
 
+let resolveX = {};
+window.resolveX = resolveX;
+
 // const dataSavePreference = ref("offline");
 
 const formData = reactive({ email: "husnat.99@gmail.com" });
 const dialog = ref(false);
+const dialog2 = reactive({ model: false, value: null });
 const step = ref(1);
 const inputFocus = ref(0);
 const inputX = ref(null);
@@ -187,36 +208,42 @@ let atInput = (i) => {
 };
 
 let sendVerificaiton = () => {
-  useBookStorex.login(formData.email);
+   useBookStorex.login(formData.email);
+  openDataChoice();
   step.value = 2;
 };
 let verifyCode = () => {
   let code = "" + inputs[0] + inputs[1] + inputs[2] + inputs[3];
-  fetch("http://localhost:3001/checkPIN/" + code)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.href);
-      if (!data.href) {
-        alert("Esta mal el cogido");
-        return;
-      }
+  // false &&
+    fetch("http://localhost:3001/checkPIN/" + code)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.href);
+        if (!data.href) {
+          alert("Esta mal el cogido");
+          return;
+        }
 
-      signInWithEmailLink(auth, formData.email, data.href).then((result) => {
-        window.localStorage.removeItem("emailForSignIn");
-        console.log(result);
-        console.log(result.user);
-        user.accessToken = result.user.accessToken;
-        user.mode = "online";
-        user.email = result.user.email;
-        step.value = 3; 
-        dialog.value = false;
-        // window.localStorage.setItem("accessToken", result.user.accessToken);
-        // window.localStorage.setItem("accessTokenCopy", result.user.accessToken);
+        signInWithEmailLink(auth, formData.email, data.href).then((result) => {
+          window.localStorage.removeItem("emailForSignIn");
+          console.log(result.user);
+          // user.accessToken = result.user.accessToken;
+          // user.email = result.user.email;
+          user.mode = "online";
+          step.value = 3;
+          dialog.value = false;
+          // window.localStorage.setItem("accessToken", result.user.accessToken);
+          // window.localStorage.setItem("accessTokenCopy", result.user.accessToken);
+        });
       });
-    });
 };
-
- 
+let openDataChoice = async () => {
+  // dialog2.model = true; 
+  // await new Promise((resolve) => {
+  //   resolveX = resolve;
+  // });
+  // console.log("yata");
+};
 </script>
   <style>
 </style>

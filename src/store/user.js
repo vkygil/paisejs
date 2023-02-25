@@ -31,12 +31,20 @@ export const useUserStore = defineStore('user', () => {
   );
 
   auth.onAuthStateChanged(async (userX) => {
+    console.log("onAuthStateChanged");
+
+    if (userX && !user.accessToken) {
+      console.log("  esta loeado");
+      if (confirm("Desea reemplazar tus datos actuales por los datos online")) {
+        let book = await getBook(userX.accessToken)
+         updateBook(book)
+      }
+    }
+
     if (userX && user.mode == "online") {
       user.accessToken = userX.accessToken;
       user.email = userX.email;
-      localStorage.setItem("accessToken", userX.accessToken);
-      let book = await getBook(userX.accessToken)
-      updateBook(book)
+      localStorage.setItem("accessToken", userX.accessToken); 
     } else {
       localStorage.removeItem("accessToken");
     }
@@ -53,7 +61,6 @@ export const useUserStore = defineStore('user', () => {
       .then((data) => {
         console.log(data.data.book);
         updateBook(data.data.book)
-        // book.value.push(data.data.book[0] )
         return data.data
       });
   }
