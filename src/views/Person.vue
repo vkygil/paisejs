@@ -73,6 +73,8 @@
                   :color="transaction.type == 'borrow' ? 'success' : 'chip'"
                   text-color="white"
                 >
+                <v-icon v-if="transaction.type == 'borrow'" start icon="mdi-account-plus"></v-icon> 
+                <v-icon v-else start icon="mdi-account-minus"></v-icon> 
                 {{transaction.type == 'borrow' ? 'Te ha dado' :  "Le has dado"}}  {{ transaction.amount }}€
                 </v-chip>
                 <div class="d-flex flex-column align-end">

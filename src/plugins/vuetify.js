@@ -26,7 +26,7 @@ const brownTing = {
     info: '#2196F3',
     success: '#66BB6A',
     warning: '#FB8C00',
-    chip:"#FFFF00" 
+    chip:"#d5cea3" 
   }
 }
 const blueTing = {

@@ -60,7 +60,7 @@
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
                     <v-list-item-subtitle class="text-success">
-                      <strong> {{ t.total.toFixed(2) }}€ </strong>
+                      <strong> {{ t.total.toFixed(0) }}€ </strong>
                     </v-list-item-subtitle>
                   </v-list-item>
                   <!-- <v-divider
@@ -81,8 +81,12 @@
 
                   <v-list-item :to="'/person/' + t.name">
                     <v-list-item-title> {{ t.name }}</v-list-item-title>
-                    <v-list-item-subtitle class="text-yellow-lighten-1">
-                      <strong> {{ t.total.toFixed(2) }}€ </strong>
+                    <v-list-item-subtitle class="">
+                      <v-chip class="ma-2" color=" " variant="outlined">
+                        {{ Math.abs(t.total).toFixed(0) }}€
+                      </v-chip>
+
+                      <!-- <strong> {{  Math.abs(t.total).toFixed(0) }}€ </strong> -->
                     </v-list-item-subtitle>
                   </v-list-item>
                   <!-- <v-divider
@@ -114,11 +118,11 @@ import { useUserStore } from "@/store/user";
 import { storeToRefs } from "pinia";
 const book = storeToRefs(useBookStore()).book;
 
-let useBookStorex = useUserStore()
+let useBookStorex = useUserStore();
 
 onMounted(async () => {
   console.log(useBookStorex);
-  window.login = useBookStorex.login 
+  window.login = useBookStorex.login;
   // theme.global.name.value = "light"
   // const props = ['name', 'email', 'tel', 'address', 'icon'];
   // const opts = {multiple: false};
@@ -149,7 +153,7 @@ const fbReducer = (a, b) => b.total + a;
   background: rgb(var(--v-theme-cream)) !important;
   /* background: linear-gradient(45deg, #d5cea3, #e5e5cb) !important; */
 }
-.text-secondary-1 { 
-  color: rgb(var(--v-theme-text-secondary-1)) !important
+.text-secondary-1 {
+  color: rgb(var(--v-theme-text-secondary-1)) !important;
 }
 </style>

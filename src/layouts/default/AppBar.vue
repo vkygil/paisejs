@@ -46,8 +46,8 @@
 
       <DataSaveSettings></DataSaveSettings>
 
-      <v-list-item disabled link>
-        <template v-slot:prepend>
+      <v-list-item link @click="downloadBook">
+        <template v-slot:prepend >
           <v-icon icon="mdi-export"></v-icon>
         </template>
         <v-list-item-title> {{ $t("Export data") }}</v-list-item-title>
@@ -77,9 +77,10 @@ import { useRoute } from "vue-router";
 import { onMounted, ref, watch } from "vue";
 import { useBookStore } from "@/store/app2";
 const store = useBookStore();
-const route = useRoute(); 
+const route = useRoute();
 const addPerson = store.addPerson;
 const saveBook = store.saveBook;
+const downloadBook = store.downloadBook;
 const drawer = ref(false);
 </script>
 <style>

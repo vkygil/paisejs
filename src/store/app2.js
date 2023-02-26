@@ -50,8 +50,8 @@ export const useBookStore = defineStore("book", () => {
     localStorage.setItem("paisejs", JSON.stringify(tosave));
     console.log("save_data_offline()");
     if (localStorage.getItem("accessToken")) {
-       fetch("https://paise.onrender.com/api/book", {
-    //  fetch("http://localhost:3001/api/book", {
+      fetch("https://paise.onrender.com/api/book", {
+        //  fetch("http://localhost:3001/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: localStorage.getItem("accessToken"), book: book }),
@@ -64,9 +64,28 @@ export const useBookStore = defineStore("book", () => {
     }
 
   }
-  
-  let updateBook =(bookc)=>{
+
+  let updateBook = (bookc) => {
     Object.assign(book, bookc)
+  }
+  let downloadBook = () => {
+    console.log("attempt to download");
+    let filename = "export.json", dataObjToWrite = book
+    const blob = new Blob([JSON.stringify(dataObjToWrite)], { type: "text/json" });
+    const link = document.createElement("a");
+
+    link.download = filename;
+    link.href = window.URL.createObjectURL(blob);
+    link.dataset.downloadurl = ["text/json", link.download, link.href].join(":");
+
+    const evt = new MouseEvent("click", {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+
+    link.dispatchEvent(evt);
+    link.remove()
   }
 
   //autosave
@@ -83,5 +102,5 @@ export const useBookStore = defineStore("book", () => {
     { deep: true }
   );
 
-  return { book, addPerson, saveBook ,updateBook};
+  return { book, addPerson, saveBook, updateBook, downloadBook };
 });

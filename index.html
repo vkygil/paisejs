@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Paisejs - Who owes me money</title>
   <link rel="manifest" href="manifest.json" />
   <!-- <link rel="apple-touch-startup-image" href="favicon.svg" /> -->
@@ -57,6 +57,11 @@
 
 <body>
   <div id="app"></div>
+  <script>
+    document.addEventListener('touchmove', function (event) {
+      if (event.scale > 1) { event.preventDefault(); }
+    }, { passive: false });
+  </script>
   <script type="module" src="/src/main.js"></script>
 </body>
 
